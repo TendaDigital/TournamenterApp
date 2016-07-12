@@ -1,0 +1,19 @@
+<div class="menu-group" layout="column" ng-repeat="panel in panels">
+
+  <div class="menu-toolbar" layout="row" layout-align="start center" ng-click="panel.open=!panel.open">
+    <md-icon class="menu-icon mdi" ng-class="panel.icon">
+    </md-icon>
+    <div class="name">{{::panel.name}}</div>
+
+    <div flex></div>
+
+    <md-button class="md-icon-button toggle-open"
+      aria-label="Close/Open">
+      <md-icon md-font-icon="mdi mdi-chevron-down" ng-show="panel.open"></md-icon>
+      <md-icon md-font-icon="mdi mdi-chevron-up" ng-hide="panel.open"></md-icon>
+    </md-button>
+  </div>
+
+  <div class="menu-content" ng-show="panel.open" ng-include="::panel.template">
+  </div>
+</div>

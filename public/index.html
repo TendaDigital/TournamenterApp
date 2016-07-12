@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+<head>
+	<title>BajaSync</title>
+	<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"/>
+
+	<meta charset="utf-8">
+	<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <!-- Fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700' rel='stylesheet' type='text/css'>
+
+  <!-- Vendor/Library UI -->
+  <link rel="stylesheet" href="components/angular-material/angular-material.css">
+  <link rel="stylesheet" href="components/mdi/materialdesignicons.min.css">
+
+  <!-- App UI -->
+  <link rel="stylesheet" href="styles/common.css">
+  <link rel="stylesheet" href="styles/dashboard.css">
+
+  <!-- Cloak guarantee -->
+  <style>
+    /* Preloader */
+    [ng\:cloak], [ng-cloak], .ng-cloak { display: none; }
+    #preloader { background-color: #2C80D2; }
+    #preloader .app-name { color: #FFF; font-weight: 200; font-size: 56px; }
+  </style>
+
+</head>
+<body ng-app="App" ng-controller="AppCtrl">
+
+  <div id="preloader" layout="column" layout-align="center center" layout-fill
+    ng-hide="_loaded">
+    <div flex></div>
+    <md-icon md-svg-icon="assets/app-icon.svg"
+      style="width: 256px; height: 256px;">
+    </md-icon>
+
+    <div class="app-name">BajaSync</div>
+    <div flex></div>
+  </div>
+
+  <div id="content" layout="column" ng-if="_loaded" ng-cloak>
+
+    <md-toolbar class="md-menu-toolbar menu-bar">
+      <div layout="row">
+
+        <!-- BajaSync Icon -->
+        <md-toolbar-filler layout layout-align="center center"
+          style="width: 100px; padding-left: 8px; padding-right: 8px;">
+
+          <!-- <md-icon md-font-icon="mdi mdi-car"></md-icon> -->
+          <md-icon md-svg-icon="assets/app-icon.svg"></md-icon>
+          <div style="font-size: 10px; padding: 8px;">BajaSync</div>
+
+        </md-toolbar-filler>
+
+        <!-- Menu Bar -->
+        <md-menu-bar ng-include="'views/dashboard.menu.html'">
+        </md-menu-bar>
+
+        <span flex></span>
+
+        <!-- Main Menu -->
+        <md-button class="md-icon-button md-default-theme md-toolbar-tools"
+          aria-label="Menu">
+          <md-icon md-font-icon="mdi mdi-dots-vertical"></md-icon>
+        </md-button>
+
+      </div>
+    </md-toolbar>
+
+    <!-- Content area -->
+    <div layout="row" flex>
+
+      <!-- Window area -->
+      <div class="window-area" ng-controller="WindowCtrl" layout="column" ng-cloak flex
+        layout-fill>
+
+        <md-tabs md-border-bottom md-autoselect layout-fill>
+          <md-tab layout-fill ng-click="open(win)"
+            ng-repeat="win in windows track by _windowId(win)"
+             label="{{win.name + ' : ' + win.userData.name}}">
+            <div ng-include="win.template" layout="column" flex
+              style="position: relative;" layout-fill>
+            </div>
+          </md-tab>
+        </md-tabs>
+
+
+      </div>
+
+
+      <!-- Sub-menu area -->
+      <md-content class="sub-menu" ng-controller="PanelCtrl"
+        ng-include="'views/dashboard.panels.html'"></md-content>
+    </div>
+
+    <!-- Status bar -->
+    <div layout="row" class="status-bar">
+      <div>Status: Disconected</div>
+    </div>
+
+  </div>
+
+
+  <!-- <div ui-view class="fx-fade-up fx-speed-800"></div> -->
+
+  <!-- Vendor -->
+  <script type="text/javascript">
+    // jQuery Needs to be loaded like this in Electron to become global
+    window.$ = window.jQuery = require('./components/jquery/jquery.min.js');
+  </script>
+  <script src="components/angular/angular.js"></script>
+  <script src="components/gsap/TweenMax.js"></script>
+  <script src="components/underscore/underscore.js"></script>
+  <script src="components/three.js/three.min.js"></script>
+
+  <!-- Libraries -->
+  <script src="components/angular-aria/angular-aria.js"></script>
+  <script src="components/angular-animate/angular-animate.js"></script>
+  <script src="components/angular-material/angular-material.js"></script>
+  <script src="components/angular-ui-router/angular-ui-router.js"></script>
+  <script src="components/ngFx/ngFx.js"></script>
+
+  <!-- App Commons -->
+  <script src="scripts/Loader.js"></script>
+  <script src="scripts/loaders/VRMLLoader.js"></script>
+  <script src="scripts/controls/MouseControls.js"></script>
+  <script src="scripts/controls/OrbitControls.js"></script>
+
+  <!-- App Specific -->
+  <script src="app/App.js"></script>
+  <script src="app/Panel.js"></script>
+  <script src="app/Window.js"></script>
+  <script src="app/Common.js"></script>
+  <script src="app/GenericFileModel.js"></script>
+
+  <!-- <script src="app/Baja.Partes.js"></script> -->
+  <!-- <script src="/scripts/Auth.js"></script> -->
+  <!-- <script src="/scripts/MatriculaHelper.js"></script> -->
+  <!-- <script src="/scripts/SearchBar.js"></script> -->
+</body>
+</html>

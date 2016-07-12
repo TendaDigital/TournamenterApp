@@ -11,6 +11,7 @@ log/
 tmp/*
 !tmp/.gitkeep
 .tmp/
+.settings.json
 
 # Logs
 logs

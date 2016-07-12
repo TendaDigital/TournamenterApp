@@ -1,0 +1,116 @@
+/*
+  Dashboard
+*/
+#content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+
+/*
+  Menu bar
+*/
+.menu-bar md-menu-bar{
+    padding-left: 10px;
+}
+
+.menu-bar {
+  min-height: auto;
+  box-shadow: 0 1px rgba(0, 0, 0, 0.15);
+}
+
+
+/*
+  Main Window
+*/
+.window-area md-tabs-content-wrapper {
+  /*display: none;*/
+}
+
+.window-area md-tabs-wrapper,
+.window-area .md-nav-bar {
+  background-color: #2C80D2 !important;
+  border: none !important;
+}
+
+.window-area md-tabs-wrapper md-tab-item{
+  color: #E0E0E0 !important;
+}
+
+.window-area md-tabs-wrapper md-tab-item.md-active{
+  color: #FFF !important;
+}
+
+.window-area md-tabs-wrapper md-next-button > md-icon {
+  color: #E0E0E0 !important;
+}
+
+.window-area md-tab-content > div {
+  height: 100%;
+  min-height: 100%;
+}
+
+.window-area md-tabs-wrapper md-ink-bar {
+  background-color: rgb(255,82,82);
+}
+
+
+/*
+  Sub-menu
+*/
+.sub-menu {
+  width: 280px;
+  background-color: #F0F0F0;
+  box-shadow: -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.sub-menu > .menu-group {
+  background-color: #EEE;
+  border-bottom: 1px solid #ccc;
+}
+
+.sub-menu > .menu-group > .menu-toolbar{
+  height: 32px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.sub-menu > .menu-group > .menu-toolbar:focus {
+  outline: 0;
+}
+
+.menu-toolbar md-icon.menu-icon {
+  margin-left: 8px;
+  height: 32px;
+  font-size: 16px;
+  line-height: 32px;
+}
+
+.menu-toolbar .toggle-open > md-icon {
+  line-height: 24px;
+}
+
+.sub-menu > .menu-group > .menu-content {
+  /*padding: 8px;*/
+  box-shadow: 0 -1px rgba(0, 0, 0, 0.05);
+}
+
+
+/*
+  Status bar
+*/
+.status-bar {
+  height: 24px;
+  background-color: #E0E0E0;
+  /*border-top: solid 1px #D0D0D0;*/
+  box-shadow: 0 -1px rgba(0, 0, 0, 0.1);
+
+  color: #888;
+  line-height: 24px;
+  font-size: 12px;
+  padding-left: 16px;
+  padding-right: 16px;
+}

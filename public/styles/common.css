@@ -1,0 +1,34 @@
+/*
+  Modifies Angular List to be more condensed
+*/
+md-list-item.md-condensed {
+  min-height: 28px;
+}
+
+md-list-item.md-condensed ._md-list-item-inner {
+  min-height: 28px;
+}
+
+md-list-item.md-condensed .md-button {
+  min-height: 28px;
+  line-height: 28px;
+}
+
+md-list-item.md-condensed md-icon {
+  margin: 0 !important;
+}
+
+/*
+  Dropping area
+*/
+.drop-area {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.5);
+  color: #FFF;
+  font-size: 32px;
+  font-weight: 300;
+}

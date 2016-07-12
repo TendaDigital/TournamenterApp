@@ -1,0 +1,74 @@
+{
+  "name": "bajasync",
+  "version": "1.0.0",
+  "authors": [
+    "Ivan Seidel <ivanseidel@gmail.com>"
+  ],
+  "description": "Node boilerplate for servers",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.6",
+    "angular-material": "1.1.0-rc4-master-f9738f5",
+    "jquery": "^2.2.4",
+    "gsap": "^1.18.5",
+    "underscore": "^1.8.3",
+    "angular-aria": "^1.5.6",
+    "angular-animate": "^1.5.6",
+    "angular-ui-router": "^0.3.1",
+    "ngFx": "^1.1.0",
+    "mdi": "^1.6.50",
+    "three.js": "threejs#*"
+  },
+  "install": {
+    "path": "public/components",
+    "sources": {
+      "jquery": {
+        "mapping": [
+          {
+            "public/_components/jquery/dist/jquery.min.js": "jquery.min.js"
+          },
+          {
+            "public/_components/jquery/dist/jquery.min.map": "jquery.min.map"
+          }
+        ]
+      },
+      "mdi": {
+        "mapping": [
+          {
+            "public/_components/mdi/fonts/materialdesignicons-webfont.eot": "../fonts/materialdesignicons-webfont.eot"
+          },
+          {
+            "public/_components/mdi/fonts/materialdesignicons-webfont.svg": "../fonts/materialdesignicons-webfont.svg"
+          },
+          {
+            "public/_components/mdi/fonts/materialdesignicons-webfont.ttf": "../fonts/materialdesignicons-webfont.ttf"
+          },
+          {
+            "public/_components/mdi/fonts/materialdesignicons-webfont.woff": "../fonts/materialdesignicons-webfont.woff"
+          },
+          {
+            "public/_components/mdi/fonts/materialdesignicons-webfont.woff2": "../fonts/materialdesignicons-webfont.woff2"
+          },
+          {
+            "public/_components/mdi/css/materialdesignicons.css": "css/materialdesignicons.css"
+          },
+          {
+            "public/_components/mdi/css/materialdesignicons.min.css": "css/materialdesignicons.min.css"
+          }
+        ]
+      }
+    }
+  },
+  "resolutions": {
+    "angular": "^1.5.6",
+    "angular-animate": "^1.5.6",
+    "gsap": "~1.11.6"
+  }
+}
