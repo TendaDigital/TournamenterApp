@@ -4,8 +4,6 @@
 *.pyc
 npm-debug.log
 
-node_modules/
-public/.components
 output/
 tests/
 dist/
@@ -13,4 +11,14 @@ log/
 tmp/*
 !tmp/.gitkeep
 .tmp/
-.sass-cache/
+
+# Logs
+logs
+*.log
+
+# Dependency directory
+node_modules
+public/_components
+public/components
+
+*.DS_Store
