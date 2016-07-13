@@ -19,7 +19,8 @@ logs
 
 # Dependency directory
 node_modules
-public/_components
 public/components
+public/_components
+public/.components
 
 *.DS_Store

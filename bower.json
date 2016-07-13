@@ -23,8 +23,7 @@
     "angular-animate": "^1.5.6",
     "angular-ui-router": "^0.3.1",
     "ngFx": "^1.1.0",
-    "mdi": "^1.6.50",
-    "three.js": "threejs#*"
+    "mdi": "^1.6.50"
   },
   "install": {
     "path": "public/components",
