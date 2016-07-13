@@ -1,5 +1,5 @@
 'use strict';
-var TAG = 'BajaSync';
+var TAG = 'Tournamenter';
 
 /**
  * Module dependencies
@@ -23,7 +23,7 @@ global.chalk = require('chalk');
 global.electron = require('electron');
 global.eApp = global.electron.app;
 global._TAG = function (tag){
-  return chalk.red(`[${tag}]`);
+  return chalk.yellow(`[${tag}]`);
 }
 
 /*

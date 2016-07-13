@@ -1,4 +1,6 @@
 angular.module('App', [
+  'ServerRunner',
+
   'Panel',
   'Window',
   'Common',
@@ -18,6 +20,10 @@ angular.module('App', [
       'default': '700'
     })
     .accentPalette('pink')
+
+  $mdThemingProvider.theme('dark', 'default')
+    .primaryPalette('yellow')
+    .dark();
 })
 
 .config( function ($stateProvider, $urlRouterProvider) {
@@ -91,6 +97,11 @@ angular.module('App', [
 
 .controller('AppCtrl', function ($timeout, $scope) {
   $scope._loaded = false;
+
+  $scope.openExternal = function openExternal(link){
+    const {shell} = require('electron');
+    shell.openExternal(link);
+  }
 
   $timeout(function (){
     $scope._loaded = true;
