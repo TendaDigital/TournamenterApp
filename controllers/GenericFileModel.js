@@ -30,7 +30,7 @@ exports.init = function (){
   }catch (e){}
 
   // Initialize collections
-  exports.createCollection('object3d');
+  exports.createCollection('servers');
 
   // Pipe Settings to IPC
   ipc.on('GenericFileModel:list', function (event, type) {
