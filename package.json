@@ -25,24 +25,31 @@
     "asar": false,
     "app-category-type": "public.app-category.productivity",
     "mac": {
-      "title": "Tournamenter",
+      "title": "Tournamenter Manager",
       "target": ["dmg"],
       "icon-size": 120,
+      "icon": "midia/Tournamenter_appicon.icns"
+    },
+    "dmg": {
+      "background": "midia/Tournamenter_installer.png",
       "contents": [
         {
-          "x": 478,
-          "y": 170,
+          "x": 610,
+          "y": 150,
           "type": "link",
           "path": "/Applications"
         },
         {
-          "x": 130,
-          "y": 170,
+          "x": 150,
+          "y": 150,
           "type": "file"
         }
       ]
     },
     "win": {
+      "target": ["squirrel"],
+      "iconUrl": "https://raw.githubusercontent.com/ivanseidel/TournamenterApp/master/midia/Tournamenter_appicon.ico",
+      "icon": "midia/Tournamenter_appicon.ico",
       "msi": false
     },
     "linux": {}
