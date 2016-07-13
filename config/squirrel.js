@@ -22,10 +22,10 @@ module.exports = function handleStartupEvent(){
 
   const target = path.basename(process.execPath)
   if (cmd === '--squirrel-install' || cmd === '--squirrel-updated') {
-    run(['--createShortcut=' + target + ''], app.quit);
+    run(['--createShortcut=' + target + ''], eApp.quit);
     return true;
   } else if (cmd === '--squirrel-uninstall') {
-    run(['--removeShortcut=' + target + ''], app.quit);
+    run(['--removeShortcut=' + target + ''], eApp.quit);
     return true;
   } else if (cmd === '--squirrel-obsolete') {
     eApp.quit()
