@@ -44,7 +44,7 @@ var configSetps = [
 	require('./config/helpers'),
 
 	// Bootstrap Models
-	require('./config/models'),
+	// require('./config/models'),
 
 	// Bootstrap Controllers
 	require('./config/controllers'),
