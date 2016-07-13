@@ -15,7 +15,7 @@
   "scripts": {
     "test": "make test",
     "start": "electron ./",
-    "postinstall": "./node_modules/.bin/bower install && ./node_modules/.bin/bower-installer",
+    "postinstall": "bower install && bower-installer",
     "pack": "build --dir",
     "dist": "build",
     "release": "build"
