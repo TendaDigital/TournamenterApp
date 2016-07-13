@@ -41,19 +41,19 @@
       "mdi": {
         "mapping": [
           {
-            "public/.components/mdi/fonts/materialdesignicons-webfont.eot": "../fonts/materialdesignicons-webfont.eot"
+            "public/.components/mdi/fonts/materialdesignicons-webfont.eot": "fonts/materialdesignicons-webfont.eot"
           },
           {
-            "public/.components/mdi/fonts/materialdesignicons-webfont.svg": "../fonts/materialdesignicons-webfont.svg"
+            "public/.components/mdi/fonts/materialdesignicons-webfont.svg": "fonts/materialdesignicons-webfont.svg"
           },
           {
-            "public/.components/mdi/fonts/materialdesignicons-webfont.ttf": "../fonts/materialdesignicons-webfont.ttf"
+            "public/.components/mdi/fonts/materialdesignicons-webfont.ttf": "fonts/materialdesignicons-webfont.ttf"
           },
           {
-            "public/.components/mdi/fonts/materialdesignicons-webfont.woff": "../fonts/materialdesignicons-webfont.woff"
+            "public/.components/mdi/fonts/materialdesignicons-webfont.woff": "fonts/materialdesignicons-webfont.woff"
           },
           {
-            "public/.components/mdi/fonts/materialdesignicons-webfont.woff2": "../fonts/materialdesignicons-webfont.woff2"
+            "public/.components/mdi/fonts/materialdesignicons-webfont.woff2": "fonts/materialdesignicons-webfont.woff2"
           },
           {
             "public/.components/mdi/css/materialdesignicons.css": "css/materialdesignicons.css"
