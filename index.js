@@ -4,7 +4,6 @@ var TAG = 'Tournamenter';
 /**
  * Module dependencies
  */
-
 var async = require('async');
 
 /**
@@ -24,6 +23,14 @@ global.electron = require('electron');
 global.eApp = global.electron.app;
 global._TAG = function (tag){
   return chalk.yellow(`[${tag}]`);
+}
+
+/**
+ * Squirrel Bootstrap
+ * (Used while Installing/Updating...)
+ */
+if(require('./config/squirrel')()){
+  return;
 }
 
 /*
