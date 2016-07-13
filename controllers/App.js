@@ -25,6 +25,9 @@ exports.init = function (){
   // Initialize GenericFileModel
   app.controllers.GenericFileModel.init();
 
+  // Initialize ServerRunner
+  app.controllers.ServerRunner.init();
+
   // By Default, open Main Window on init
   app.controllers.MainWindow.launch();
 }
