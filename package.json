@@ -21,6 +21,7 @@
     "async": "1.2.1",
     "chalk": "^1.1.3",
     "electron": "^0.4.1",
+    "forever-monitor": "^1.7.0",
     "lodash": "^4.13.1",
     "tournamenter": "git+https://github.com/ivanseidel/Tournamenter.git"
   },
@@ -28,6 +29,6 @@
     "bower": "latest",
     "bower-installer": "latest",
     "electron-packager": "^7.0.3",
-    "electron-prebuilt": "^1.2.1"
+    "electron-prebuilt": "^1.2.6"
   }
 }
