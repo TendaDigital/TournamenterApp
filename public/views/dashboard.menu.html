@@ -1,5 +1,6 @@
 <div ng-controller="MenuCtrl as ctrl">
   <md-menu-bar>
+    <!-- Servers -->
     <md-menu>
       <button ng-click="$mdOpenMenu()">
         Servers
@@ -26,5 +27,31 @@
 
       </md-menu-content>
     </md-menu>
+
+    <!-- Developer -->
+    <md-menu>
+      <button ng-click="$mdOpenMenu()">
+        Developer
+      </button>
+
+      <md-menu-content>
+
+        <md-menu-item>
+          <md-button ng-click="ctrl.action('App:openDevTools')">
+            Open Developer Tools
+          </md-button>
+        </md-menu-item>
+
+        <md-menu-item>
+          <md-button ng-click="ctrl.action('App:reload')">
+            Reload Window
+          </md-button>
+        </md-menu-item>
+
+      </md-menu-content>
+    </md-menu>
   </md-menu-bar>
+
+</md-menu-bar>
+
 </div>

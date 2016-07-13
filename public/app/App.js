@@ -38,6 +38,20 @@ angular.module('App', [
 	// $urlRouterProvider.otherwise('/dashboard')
 })
 
+// Set menu bindings
+.run( function ($rootScope) {
+
+  // Open DevTools
+  $rootScope.$on('App:openDevTools', function (){
+    require('electron').remote.getCurrentWindow().toggleDevTools();
+  })
+
+  // Reload Page
+  $rootScope.$on('App:reload', function (){
+    location.reload();
+  })
+})
+
 // Safelly provides binding/unbinding to ipcRenderer of Electron
 .service('ipcRenderer', function (){
   var service = this;

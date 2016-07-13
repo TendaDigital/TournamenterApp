@@ -25,7 +25,7 @@ exports.launch = function (){
   mainWindow.loadURL(`file://${__dirname}/../public/index.html`)
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools({detached: true})
+  // mainWindow.webContents.openDevTools({detached: true})
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {

@@ -7,7 +7,7 @@ angular.module('ServerRunner', [
 .run(function ($rootScope, PanelService, ServerService, GenericFileModel, Dialogs) {
   // Opens Servers panel
   PanelService.open({
-    name: 'Servidores',
+    name: 'Created Servers',
     icon: 'mdi-server',
     template: 'views/servers.panel.html',
     open: true,
@@ -251,24 +251,16 @@ angular.module('ServerRunner', [
   }, true);
 
   function updateInstanceState(){
-    let status = $scope.statusState = ServerService.state($scope.serverId);
+    let serverUp = $scope.statusState = ServerService.state($scope.serverId);
+    $scope.serverUp = serverUp;
 
-    $scope.serverUp = false;
-
-    if(!status){
-      $scope.statusString = 'Stopped';
-    }else if(status == 'STARTING'){
-      $scope.statusString = 'Starting...';
-    }else{
+    if(serverUp){
       $scope.statusString = 'Running';
-      $scope.serverUp = true;
-    }
-
-    // Set serverUpColor
-    if($scope.serverUp)
       $scope.serverUpColor = 'green';
-    else
+    }else{
+      $scope.statusString = 'Stopped';
       $scope.serverUpColor = 'red';
+    }
 
     // Apply changes to scope if not in digest phase
     if(!$scope.$$phase)
@@ -292,8 +284,8 @@ angular.module('ServerRunner', [
     // Apply defaults on `env`
     $scope.configs.env = _.defaults(configs.env || {}, {
       APP_NAME: $scope.serverId,
-      APP_LOGO: null,
-      PASSWORD: null,
+      APP_LOGO: '',
+      PASSWORD: '',
       DB_FOLDER: app.getPath('userData'),
       PORT: 3000,
     })

@@ -28,6 +28,12 @@ exports.init = function (){
   // Initialize ServerRunner
   app.controllers.ServerRunner.init();
 
+  // Change badge count on server change
+  app.controllers.ServerRunner.onStateChange = (states) => {
+    let runningServers = _.without(_.values(states), false).length;
+    eApp.setBadgeCount(runningServers);
+  }
+
   // By Default, open Main Window on init
   app.controllers.MainWindow.launch();
 }

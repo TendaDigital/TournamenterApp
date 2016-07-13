@@ -7,14 +7,14 @@
 
     <md-switch ng-model="serverUp" ng-change="changeServerState()"
       class="md-warn" md-no-ink
-      ng-disabled="statusState == 'STARTING' || needsSave"
+      ng-disabled="!serverUp && needsSave"
       aria-label="Start server">
       {{statusString}}
     </md-switch>
     <div flex></div>
 
     <md-button class="md-primary" ng-click="save()" ng-disabled="!needsSave">
-      Salvar
+      Save
     </md-button>
   </md-content>
 

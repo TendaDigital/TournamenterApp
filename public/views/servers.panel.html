@@ -9,13 +9,13 @@
     <div style="font-size: 28px;">
       <md-icon
         md-font-icon="mdi mdi-play-circle"
-        ng-show="serversState[server] == 'START'"
+        ng-show="serversState[server]"
         md-colors="{color: 'green-A700'}">
       </md-icon>
 
       <md-icon
         md-font-icon="mdi mdi-stop-circle"
-        ng-show="serversState[server] != 'START'"
+        ng-hide="serversState[server]"
         md-colors="{color: 'red-A400'}">
       </md-icon>
     </div>

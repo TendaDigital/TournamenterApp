@@ -1,7 +1,11 @@
 'use strict';
 var TAG = _TAG('ServerRunner');
 
+var path = require('path');
 var forever = require('forever-monitor');
+
+// Single Callback for global state change
+exports.onStateChange = null;
 
 // Current running instances of Tournamenter
 exports._instances = {};
@@ -28,7 +32,7 @@ exports.init = function (){
     // Kills all processes
     for(var k in exports._instances){
       let instance = exports._instances[k];
-      if(!instance || !instance.STATE)
+      if(!instance || !instance.running)
         continue;
 
       console.log(TAG, chalk.red(`Killing ${k}`));
@@ -49,13 +53,23 @@ exports.start = function (serverId, cb) {
   // Load instance configurations from files db
   let optsDb = app.controllers.GenericFileModel.get('servers', serverId) || {};
 
+  // Find out tournamenter location
+  let electronCmd = path.join(__dirname, '../node_modules/.bin/electron');
+  let tournamenterModule = require.resolve('tournamenter');
+  let tournamenterScript = path.basename(tournamenterModule);
+  let tournamenterDir = path.dirname(tournamenterModule);
+
+  exports.emitLog(serverId, 'launch', tournamenterScript, tournamenterDir);
+
   // Prepare instance options
   let opts = {
     max: 0,
     uid: serverId,
     silent: true,
     killTree: true,
-    command: 'node',
+    // command: 'node',
+    // fork: true,
+    // cwd: path.join(__dirname, '../'),
 
     minUptime: optsDb.minUptime || 2000,
     spinSleepTime: optsDb.spinSleepTime || 2000,
@@ -63,13 +77,14 @@ exports.start = function (serverId, cb) {
     env: _.defaults(optsDb.env, {
       APP_NAME: 'Tournamenter',
       APP_UID: serverId,
+      ELECTRON_RUN_AS_NODE: 1,
     }),
   };
 
   // Launch server
-  let tournamenterScript = require.resolve('tournamenter');
-  let child = new (forever.Monitor)(tournamenterScript, opts);
-  exports.emitLog(serverId, 'launch', tournamenterScript);
+  // let electronpath = require('electron-prebuilt');
+  let child = new (forever.Monitor)(tournamenterModule, opts);
+  // let child = new require('child_process').fork(tournamenterModule);
   exports._instances[serverId] = child;
 
   // Bind events
@@ -98,7 +113,7 @@ exports.states = function (){
   let states = {};
 
   for(let k in exports._instances)
-    states[k] = exports._instances[k] ? exports._instances[k].STATE : null;
+    states[k] = exports._instances[k].running;
 
   return states;
 }
@@ -112,31 +127,31 @@ exports.state = function (serverId) {
   if(!(serverId in exports._instances))
     return null;
 
-  return exports._instances[serverId].STATE;
+  return exports._instances[serverId].running;
 }
 
 
 // Bind events to the process (links state and emits events)
 exports._bindEvents = function (serverId, child) {
-  child.STATE = null;
+  // child.STATE = null;
 
   child.on('start', () => {
-    child.STATE = 'START';
+    // child.STATE = 'START';
     exports.emitUpdate(serverId);
   })
 
   child.on('stop', () => {
-    child.STATE = 'STOP';
+    // child.STATE = 'STOP';
     exports.emitUpdate(serverId);
   })
 
   child.on('restart', () => {
-    child.STATE = 'START';
+    // child.STATE = 'START';
     exports.emitUpdate(serverId);
   })
 
   child.on('exit', () => {
-    child.STATE = null;
+    // child.STATE = null;
     // Destroy instance
     delete exports._instances[serverId];
 
@@ -177,5 +192,9 @@ exports.emitLog = function (serverId, type, message) {
 // Emit the states of the servers
 exports.emitUpdates = function (){
   let _window = app.controllers.MainWindow.getWindow();
-  _window && _window.webContents.send('ServerRunner:update', exports.states());
+  let states = exports.states()
+  _window && _window.webContents.send('ServerRunner:update', states);
+
+  // Notify application
+  exports.onStateChange && exports.onStateChange(states);
 }
