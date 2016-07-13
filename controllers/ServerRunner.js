@@ -55,6 +55,7 @@ exports.start = function (serverId, cb) {
     uid: serverId,
     silent: true,
     killTree: true,
+    command: 'node',
 
     minUptime: optsDb.minUptime || 2000,
     spinSleepTime: optsDb.spinSleepTime || 2000,
@@ -66,7 +67,9 @@ exports.start = function (serverId, cb) {
   };
 
   // Launch server
-  let child = new (forever.Monitor)(require.resolve('tournamenter'), opts);
+  let tournamenterScript = require.resolve('tournamenter');
+  let child = new (forever.Monitor)(tournamenterScript, opts);
+  exports.emitLog(serverId, 'launch', tournamenterScript);
   exports._instances[serverId] = child;
 
   // Bind events
@@ -115,7 +118,7 @@ exports.state = function (serverId) {
 
 // Bind events to the process (links state and emits events)
 exports._bindEvents = function (serverId, child) {
-  child.STATE = 'STARTING';
+  child.STATE = null;
 
   child.on('start', () => {
     child.STATE = 'START';
@@ -167,7 +170,7 @@ exports.emitUpdate = function (serverId) {
 // Notifies about new console messages
 exports.emitLog = function (serverId, type, message) {
   let _window = app.controllers.MainWindow.getWindow();
-  _window && _window.webContents.send('ServerRunner:log:'+serverId, type, message);
+  _window && _window.webContents.send('ServerRunner:log:'+serverId, type, message.toString());
 }
 
 

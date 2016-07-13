@@ -61,6 +61,15 @@ angular.module('ServerRunner', [
     ipcRenderer.on(scope, eventName, callback);
   }
 
+  // Subscribe to logs on a specific server
+  service.subscribeLogs = function (scope, serverId, callback){
+    if(!scope || !callback)
+      return console.error('Cannot subscribe with invalid scope and callback!');
+
+    let eventName = 'ServerRunner:log:' + serverId;
+    ipcRenderer.on(scope, eventName, callback);
+  }
+
   service.start = function (serverId) {
     ipcRenderer.send('ServerRunner:start', serverId);
   }
@@ -120,6 +129,10 @@ angular.module('ServerRunner', [
   }
 })
 
+
+//
+// Configures a server and enables to start/stop
+//
 .controller('ServerWindowCtrl', function ($scope, GenericFileModel,
   ServerService, Dialogs, WindowService) {
 
@@ -152,6 +165,7 @@ angular.module('ServerRunner', [
 
     // Keep track of the state of this instance
     ServerService.subscribe($scope, $scope.serverId, updateInstanceState);
+    ServerService.subscribeLogs($scope, $scope.serverId, updateLogs);
   }
 
   // Saves data into a persistent storage
@@ -283,6 +297,10 @@ angular.module('ServerRunner', [
       DB_FOLDER: app.getPath('userData'),
       PORT: 3000,
     })
+  }
+
+  function updateLogs(evt, type, message){
+    console.log(`[${$scope.serverId}]`, type, ':', message);
   }
 
 })

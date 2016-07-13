@@ -1,34 +1,66 @@
 {
   "name": "tournamenter-app",
-  "productName": "",
-  "version": "1.0.0",
-  "description": "Tournamenter app",
+  "author": "Ivan Seidel",
+  "productName": "Tournamenter",
+  "description": "Tournamenter Manager App",
+  "homepage": "https://github.com/ivanseidel/TournamenterApp",
   "repository": "https://github.com/ivanseidel/TournamenterApp",
+  "license": "MIT",
+  "version": "1.0.0",
   "README": "none",
   "engines": {
     "node": "0.12.x"
   },
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "test": "make test",
-    "build": "./node_modules/.bin/electron-packager . --platform=darwin --arch=all",
-    "start": "./node_modules/.bin/electron . index",
-    "postinstall": "./node_modules/.bin/bower install && ./node_modules/.bin/bower-installer"
+    "start": "electron ./",
+    "postinstall": "./node_modules/.bin/bower install && ./node_modules/.bin/bower-installer",
+    "pack": "build --dir",
+    "dist": "build",
+    "release": "build"
   },
-  "author": "",
-  "license": "ISC",
+  "build": {
+    "appId": "com.tournamenter",
+    "asar": false,
+    "app-category-type": "public.app-category.productivity",
+    "mac": {
+      "title": "Tournamenter",
+      "target": ["dmg"],
+      "icon-size": 120,
+      "contents": [
+        {
+          "x": 478,
+          "y": 170,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 130,
+          "y": 170,
+          "type": "file"
+        }
+      ]
+    },
+    "win": {
+      "msi": false
+    },
+    "linux": {}
+  },
   "dependencies": {
     "async": "1.2.1",
     "chalk": "^1.1.3",
     "electron": "^0.4.1",
     "forever-monitor": "^1.7.0",
+    "kerberos": "0.0.21",
     "lodash": "^4.13.1",
     "tournamenter": "git+https://github.com/ivanseidel/Tournamenter.git"
   },
   "devDependencies": {
     "bower": "latest",
     "bower-installer": "latest",
-    "electron-packager": "^7.0.3",
-    "electron-prebuilt": "^1.2.6"
+    "electron-builder": "^5.12.1",
+    "electron-prebuilt": "^1.2.6",
+    "rimraf": "^2.5.3"
   }
 }
