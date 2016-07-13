@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-	<title>BajaSync</title>
+	<title>Tournamenter Manager</title>
 	<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"/>
 
 	<meta charset="utf-8">
@@ -38,7 +38,7 @@
       style="width: 256px; height: 256px;">
     </md-icon>
 
-    <div class="app-name">BajaSync</div>
+    <div class="app-name">Tournamenter</div>
     <div flex></div>
   </div>
 
@@ -47,13 +47,13 @@
     <md-toolbar class="md-menu-toolbar menu-bar">
       <div layout="row">
 
-        <!-- BajaSync Icon -->
+        <!-- App Icon -->
         <md-toolbar-filler layout layout-align="center center"
           style="width: 100px; padding-left: 8px; padding-right: 8px;">
 
           <!-- <md-icon md-font-icon="mdi mdi-car"></md-icon> -->
-          <md-icon md-svg-icon="assets/app-icon.svg"></md-icon>
-          <div style="font-size: 10px; padding: 8px;">BajaSync</div>
+          <md-icon md-svg-icon="assets/app-icon.svg" style="padding-left: 8px;"></md-icon>
+          <div style="font-size: 10px; padding: 8px;">Tournamenter</div>
 
         </md-toolbar-filler>
 
@@ -79,19 +79,18 @@
       <div class="window-area" ng-controller="WindowCtrl" layout="column" ng-cloak flex
         layout-fill>
 
-        <md-tabs md-border-bottom md-autoselect layout-fill>
+        <md-tabs md-autoselect layout-fill
+          md-selected="selectedWindow">
           <md-tab layout-fill ng-click="open(win)"
             ng-repeat="win in windows track by _windowId(win)"
-             label="{{win.name + ' : ' + win.userData.name}}">
+            label="{{win.name + (win.userData.name ? ' : ' + win.userData.name : '')}}">
             <div ng-include="win.template" layout="column" flex
               style="position: relative;" layout-fill>
             </div>
           </md-tab>
         </md-tabs>
 
-
       </div>
-
 
       <!-- Sub-menu area -->
       <md-content class="sub-menu" ng-controller="PanelCtrl"
@@ -100,7 +99,17 @@
 
     <!-- Status bar -->
     <div layout="row" class="status-bar">
-      <div>Status: Disconected</div>
+      <div>
+        Tournamenter Manager -
+        Made with <i class="mdi mdi-heart" style="color:#e74c3c;"></i> by nerds in
+        <a ng-click="openExternal('https://github.com/ivanseidel/Tournamenter')" href="#"><i class="mdi mdi-github-circle" style="color: #4bc0fc;"></i></a>.
+      </div>
+      <div flex></div>
+      <div>
+        Developed by
+        <a href="#" ng-click="openExternal('https://github.com/ivanseidel')" class="discrete-link">Ivan Seidel</a>
+        and <a href="#" ng-click="openExternal('http://github.com/RoboCupDev')" class="discrete-link">RoboCupDev</a>.
+      </div>
     </div>
 
   </div>
@@ -116,7 +125,6 @@
   <script src="components/angular/angular.js"></script>
   <script src="components/gsap/TweenMax.js"></script>
   <script src="components/underscore/underscore.js"></script>
-  <script src="components/three.js/three.min.js"></script>
 
   <!-- Libraries -->
   <script src="components/angular-aria/angular-aria.js"></script>
@@ -126,10 +134,7 @@
   <script src="components/ngFx/ngFx.js"></script>
 
   <!-- App Commons -->
-  <script src="scripts/Loader.js"></script>
-  <script src="scripts/loaders/VRMLLoader.js"></script>
-  <script src="scripts/controls/MouseControls.js"></script>
-  <script src="scripts/controls/OrbitControls.js"></script>
+
 
   <!-- App Specific -->
   <script src="app/App.js"></script>
@@ -138,7 +143,7 @@
   <script src="app/Common.js"></script>
   <script src="app/GenericFileModel.js"></script>
 
-  <!-- <script src="app/Baja.Partes.js"></script> -->
+  <script src="app/ServerRunner.js"></script>
   <!-- <script src="/scripts/Auth.js"></script> -->
   <!-- <script src="/scripts/MatriculaHelper.js"></script> -->
   <!-- <script src="/scripts/SearchBar.js"></script> -->

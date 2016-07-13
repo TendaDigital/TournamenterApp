@@ -19,6 +19,20 @@ md-list-item.md-condensed md-icon {
 }
 
 /*
+  Modifies padding in form input blocks
+*/
+md-input-container{
+  margin: 18px 0 0 0;
+}
+
+/*
+  Removes warning messages in servers-window
+*/
+.servers-window .md-errors-spacer{
+  display: none;
+}
+
+/*
   Dropping area
 */
 .drop-area {
@@ -31,4 +45,12 @@ md-list-item.md-condensed md-icon {
   color: #FFF;
   font-size: 32px;
   font-weight: 300;
+}
+
+/*
+  Nicer look to links
+*/
+.discrete-link{
+  color: #457afb;
+  text-decoration: none;
 }

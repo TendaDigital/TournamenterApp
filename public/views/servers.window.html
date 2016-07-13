@@ -1,0 +1,87 @@
+<md-content ng-controller="ServerWindowCtrl"
+  layout-fill ng-init="init(win)"
+  class="servers-window">
+
+  <md-content layout="row" md-theme="dark" style="padding: 8px 16px;"
+    md-colors="{background: '{{'dark-'+serverUpColor}}'}">
+
+    <md-switch ng-model="serverUp" ng-change="changeServerState()"
+      class="md-warn" md-no-ink
+      ng-disabled="statusState == 'STARTING' || needsSave"
+      aria-label="Start server">
+      {{statusString}}
+    </md-switch>
+    <div flex></div>
+
+    <md-button class="md-primary" ng-click="save()" ng-disabled="!needsSave">
+      Salvar
+    </md-button>
+  </md-content>
+
+  <form name="userForm" layout-padding>
+
+    <div layout="row">
+      <md-input-container class="md-block" flex="70">
+        <label>Server Name</label>
+        <input ng-model="configs.env.APP_NAME" ng-disabled="serverUp">
+      </md-input-container>
+      <md-input-container class="md-block" flex>
+        <label>PORT</label>
+        <input ng-model="configs.env.PORT" ng-disabled="serverUp"  type="number" step="1">
+      </md-input-container>
+    </div>
+
+    <div layout="row">
+      <md-input-container class="md-block" flex="70">
+        <label>Admin Password</label>
+        <input ng-model="configs.env.PASSWORD" ng-disabled="serverUp"
+          type="{{showPassword ? 'text' : 'password'}}">
+      </md-input-container>
+      <md-input-container class="md-block" flex>
+        <!-- <input ng-model="showPassword"> -->
+        <md-checkbox ng-model="showPassword" aria-label="Show password"
+          style="margin: 8px;">
+          <small>Show password</small>
+        </md-checkbox>
+      </md-input-container>
+    </div>
+
+    <div layout="row">
+      <md-input-container class="md-block" flex>
+        <label>Application Logo Path</label>
+        <input ng-model="configs.env.APP_LOGO" ng-disabled="serverUp">
+      </md-input-container>
+      <md-input-container class="md-block">
+        <md-button ng-disabled="serverUp" ng-click="openImage()"
+          style="margin: 0;">
+          <md-icon md-font-icon="mdi mdi-file-image"></md-icon>
+          Select
+        </md-button>
+      </md-input-container>
+    </div>
+
+    <div layout="row">
+      <md-input-container class="md-block" flex>
+        <label>Database folder path</label>
+        <input ng-model="configs.env.DB_FOLDER" ng-disabled="serverUp">
+      </md-input-container>
+      <md-input-container class="md-block">
+        <md-button ng-disabled="serverUp" ng-click="openDBPath()"
+          style="margin: 0;">
+          <md-icon md-font-icon="mdi mdi-database"></md-icon>
+          Select
+        </md-button>
+      </md-input-container>
+    </div>
+
+    <div layout="row">
+      <div flex></div>
+      <md-button ng-disabled="serverUp" ng-click="deleteServer(true)" class="md-warn md-raised">
+        <md-icon md-font-icon="mdi mdi-delete"></md-icon>
+        Delete Server
+      </md-button>
+    </div>
+
+  </form>
+
+</md-content>

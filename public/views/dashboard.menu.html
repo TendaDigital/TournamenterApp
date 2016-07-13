@@ -2,22 +2,26 @@
   <md-menu-bar>
     <md-menu>
       <button ng-click="$mdOpenMenu()">
-        Arquivo
+        Servers
       </button>
 
       <md-menu-content>
 
         <md-menu-item>
-          <md-menu>
-            <md-button ng-click="$mdOpenMenu()">Novo</md-button>
-            <md-menu-content>
-
-              <md-menu-item>
-                <md-button ng-click="ctrl.action('PartesWindow:open')">Parte 3D</md-button>
-              </md-menu-item>
-
-            </md-menu-content>
-          </md-menu>
+          <md-button ng-click="ctrl.action('Servers:create')">
+            New Server
+          </md-button>
+        </md-menu-item>
+        <md-menu-divider></md-menu-divider>
+        <md-menu-item>
+          <md-button ng-click="ctrl.action('Servers:startAll')">
+            Start all servers
+          </md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button ng-click="ctrl.action('Servers:stopAll')">
+            Stop all servers
+          </md-button>
         </md-menu-item>
 
       </md-menu-content>

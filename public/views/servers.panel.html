@@ -1,0 +1,25 @@
+<md-list ng-controller="ServersPanelCtrl" ng-cloak style="padding: 0;">
+  <md-list-item class="secondary-button-padding"
+    ng-repeat="server in servers"
+    ng-click="openServerWindow(server)">
+
+    <small flex><strong>{{server}}</strong> [{{serversPorts[server]}}]</small>
+    <flex></flex>
+
+    <div style="font-size: 28px;">
+      <md-icon
+        md-font-icon="mdi mdi-play-circle"
+        ng-show="serversState[server] == 'START'"
+        md-colors="{color: 'green-A700'}">
+      </md-icon>
+
+      <md-icon
+        md-font-icon="mdi mdi-stop-circle"
+        ng-show="serversState[server] != 'START'"
+        md-colors="{color: 'red-A400'}">
+      </md-icon>
+    </div>
+
+    <md-divider ng-if="!$last"></md-divider>
+  </md-list-item>
+</md-list>
