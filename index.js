@@ -47,10 +47,14 @@ var configSetps = [
     if(!process.env.GITHUB_TOKEN)
       throw new Error('GITHUB_TOKEN not set!')
 
+    if(!process.env.GITHUB_SECRET)
+      throw new Error('GITHUB_SECRET not set!')
+
     app.nuts = Nuts({
       // GitHub configuration
       repository: process.env.GITHUB_REPO || 'ivanseidel/TournamenterApp',
       token: process.env.GITHUB_TOKEN,
+      refreshSecret: process.env.GITHUB_SECRET,
     });
 
     app.express.use('/', app.nuts.router);
