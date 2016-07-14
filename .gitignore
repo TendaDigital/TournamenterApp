@@ -1,0 +1,26 @@
+*.swp
+*.swo
+*.DS_Store
+*.pyc
+npm-debug.log
+
+output/
+tests/
+dist/
+log/
+tmp/*
+!tmp/.gitkeep
+.tmp/
+.settings.json
+
+# Logs
+logs
+*.log
+
+# Dependency directory
+node_modules
+public/components
+public/_components
+public/.components
+
+*.DS_Store
