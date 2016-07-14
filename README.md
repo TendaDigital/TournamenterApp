@@ -52,8 +52,32 @@ version of original `tournamenter`, but without `Sails`, and more a few features
 father: `Tournamenter Manager`, the Desktop application to manage multiple tournamenter
 instances easily. THE END
 
-*TL;DR;*: I wasted my time 3 times before doing something that I would never
+**TL;DR;**: I wasted my time 3 times before doing something that I would never
 need to do again, and then I re-did it to never have to do it again (again).
 
+## Prerequisites:
 
-## Documentation TODO
+A Computer! With or without internet.
+
+The latest version of TournamenterApp!
+
+#### On Windows:
+
+- Make sure your machine is at least on `Windows 7`
+- It's always good to have administrator privileges
+- [Download Here](http://what.com)
+
+#### On MacOs
+
+- You do not need to `sudo`, but it's also good to be an admin
+- [Download Here](http://what.com)
+
+#### On Linux
+
+- TODO
+- The Linux version does not currently automatically update so you will need to download newer versions.
+- [Download Here](http://what.com)
+
+## Documentation
+
+If you want to learn more about how to use Tournamenter, check out our [Wiki](TODO).
