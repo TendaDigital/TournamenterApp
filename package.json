@@ -1,7 +1,10 @@
 {
   "name": "tournamenter-app",
-  "author": "Ivan Seidel",
-  "email": "ivanseidel@gmail.com",
+  "author": {
+    "name": "Ivan Seidel",
+    "email": "ivan@tendadigital.net",
+    "url": "https://github.com/ivanseidel"
+  },
   "productName": "Tournamenter",
   "description": "Tournamenter Manager App",
   "homepage": "https://github.com/ivanseidel/TournamenterApp",
