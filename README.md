@@ -81,3 +81,4 @@ The latest version of TournamenterApp!
 ## Documentation
 
 If you want to learn more about how to use Tournamenter, check out our [Wiki](TODO).
+There will be a series of videos too, so checkout: [...(TODO)](https://www.youtube.com)
