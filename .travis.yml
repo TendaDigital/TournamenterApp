@@ -22,9 +22,9 @@ cache:
 addons:
   apt:
     packages:
+      - graphicsmagick
       - libgnome-keyring-dev
       - icnsutils
-      - graphicsmagick
       - xz-utils
 
 before_install:
