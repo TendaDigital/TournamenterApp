@@ -36,4 +36,7 @@ exports.init = function (){
 
   // By Default, open Main Window on init
   app.controllers.MainWindow.launch();
+
+  // Initialize Autoupdater
+  app.controllers.AutoUpdater.init();
 }

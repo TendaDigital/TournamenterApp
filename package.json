@@ -6,11 +6,11 @@
     "url": "https://github.com/ivanseidel"
   },
   "productName": "Tournamenter",
-  "description": "Tournamenter Manager App",
+  "description": "Tournamenter Manager",
   "homepage": "https://github.com/ivanseidel/TournamenterApp",
   "repository": "https://github.com/ivanseidel/TournamenterApp",
   "license": "MIT",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "README": "none",
   "engines": {
     "node": "0.12.x"
@@ -32,10 +32,10 @@
       "title": "Tournamenter Manager",
       "target": ["dmg"],
       "icon-size": 120,
-      "icon": "midia/Tournamenter_appicon.icns"
+      "icon": "build/icon.icns"
     },
     "dmg": {
-      "background": "midia/Tournamenter_installer.png",
+      "background": "build/background.png",
       "contents": [
         {
           "x": 610,
@@ -52,11 +52,13 @@
     },
     "win": {
       "target": ["squirrel"],
-      "iconUrl": "https://raw.githubusercontent.com/ivanseidel/TournamenterApp/master/midia/Tournamenter_appicon.ico",
-      "icon": "midia/Tournamenter_appicon.ico",
+      "iconUrl": "https://raw.githubusercontent.com/ivanseidel/TournamenterApp/master/build/icon.ico",
+      "icon": "build/icon.ico",
       "msi": false
     },
-    "linux": {}
+    "linux": {
+      "description": "Tournamenter Manager App"
+    }
   },
   "dependencies": {
     "async": "1.2.1",

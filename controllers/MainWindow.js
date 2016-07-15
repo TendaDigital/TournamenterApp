@@ -25,7 +25,8 @@ exports.launch = function (){
   mainWindow.loadURL(`file://${__dirname}/../public/index.html`)
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools({detached: true})
+  if(app.helpers.isDev())
+    mainWindow.webContents.openDevTools({detached: true})
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
@@ -34,4 +35,12 @@ exports.launch = function (){
   })
 
   console.log(TAG, chalk.cyan('Launching mainWindow'))
+}
+
+exports.notify = function notify(title, message, stick) {
+  if (!mainWindow) {
+    return;
+  }
+
+  mainWindow.webContents.send('notify', title, message, stick);
 }
