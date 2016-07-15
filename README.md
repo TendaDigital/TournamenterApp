@@ -1,7 +1,6 @@
 # Tournamenter App
 [![Build Status](https://travis-ci.org/ivanseidel/TournamenterApp.svg?branch=deploy)](https://travis-ci.org/ivanseidel/TournamenterApp) [![Build status](https://ci.appveyor.com/api/projects/status/kip5669pxyqr23jg/branch/deploy?svg=true)](https://ci.appveyor.com/project/ivanseidel/tournamenterapp/branch/deploy)
 
-
 This project is an wrapper for the [Tournamenter](https://github.com/ivanseidel/tournamenter)
 app. It is a service manager that can launch and manage Tournamenter servers locally.
 
@@ -15,6 +14,12 @@ It allows you to run events with a easy to use interface that let's you:
 * Create Tables (With custom ranking options and Columns)
 * Create `Views` that will be displayed in TV Screens and Projectors
   (With custom `Pages` that can be customized)
+
+## Download and Install
+The App is in BETA, and should work fine on Mac and Windows. Download the latest version for your OS:
+* [Windows x64 (Latest)](http://tournamenter.herokuapp.com/download/windows)
+* [Mac OSX (Latest)](http://tournamenter.herokuapp.com/download/osx)
+* [Linux (Latest)](http://tournamenter.herokuapp.com/download/linux)
 
 ## What it does
 It allows you to create instances ("run servers") of Tournamenter without knowing
