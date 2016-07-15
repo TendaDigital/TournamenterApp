@@ -24,12 +24,12 @@
   <style>
     /* Preloader */
     [ng\:cloak], [ng-cloak], .ng-cloak { display: none; }
-    #preloader { background-color: #2C80D2; }
+    #preloader, body:not(.loaded) { background-color: #2C80D2; }
     #preloader .app-name { color: #FFF; font-weight: 200; font-size: 56px; }
   </style>
 
 </head>
-<body ng-app="App" ng-controller="AppCtrl">
+<body ng-app="App" ng-controller="AppCtrl" ng-class="{loaded: _loaded}">
 
   <div id="preloader" layout="column" layout-align="center center" layout-fill
     ng-hide="_loaded">
@@ -38,7 +38,7 @@
       style="width: 256px; height: 256px;">
     </md-icon>
 
-    <div class="app-name">Tournamenter</div>
+    <div class="app-name">Tournamenter v{{::version}}</div>
     <div flex></div>
   </div>
 
@@ -100,7 +100,7 @@
     <!-- Status bar -->
     <div layout="row" class="status-bar">
       <div>
-        Tournamenter Manager -
+        Tournamenter Manager v{{::version}} -
         Made with <i class="mdi mdi-heart" style="color:#e74c3c;"></i> by nerds in
         <a ng-click="openExternal('https://github.com/ivanseidel/Tournamenter')" href="#"><i class="mdi mdi-github-circle" style="color: #4bc0fc;"></i></a>.
       </div>
@@ -141,6 +141,7 @@
   <script src="app/Panel.js"></script>
   <script src="app/Window.js"></script>
   <script src="app/Common.js"></script>
+  <script src="app/Notify.js"></script>
   <script src="app/GenericFileModel.js"></script>
 
   <script src="app/ServerRunner.js"></script>
