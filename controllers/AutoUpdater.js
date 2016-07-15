@@ -42,7 +42,15 @@ exports.init = function init(window) {
 
   autoUpdater.setFeedURL(`http://${UPDATE_SERVER_HOST}/update/${os.platform()}_${os.arch()}/${version}`)
 
-  window.webContents.once('did-frame-finish-load', (event) => {
-    autoUpdater.checkForUpdates()
-  })
+  var win = app.controllers.MainWindow.getWindow();
+
+  if(win){
+    win.webContents.once('did-frame-finish-load', (event) => {
+      autoUpdater.checkForUpdates()
+    })
+  }else{
+    setTimeout(() => {
+      autoUpdater.checkForUpdates();
+    }, 6000);
+  }
 }
