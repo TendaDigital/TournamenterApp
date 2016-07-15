@@ -19,12 +19,14 @@ exports.init = function init(window) {
   const version = eApp.getVersion()
   autoUpdater.addListener('update-available', (event) => {
     console.log(TAG, chalk.green('A new update is available'));
+    app.controllers.MainWindow.notify('', 'New Update available. Downloading...', 8000);
   })
 
   autoUpdater.addListener('update-downloaded', (event, releaseNotes, releaseName, releaseDate, updateURL) => {
     app.controllers.MainWindow.notify(
       'A new update is ready to install',
-      `Version ${releaseName} is downloaded and will be automatically installed on Quit`
+      `Version ${releaseName} is downloaded and will be automatically installed on Quit`,
+      'OK'
     );
   })
 
@@ -34,6 +36,7 @@ exports.init = function init(window) {
 
   autoUpdater.addListener('checking-for-update', (event) => {
     console.log(TAG, 'checking-for-update')
+    app.controllers.MainWindow.notify('', 'Checking for updates...');
   })
 
   autoUpdater.addListener('update-not-available', () => {
