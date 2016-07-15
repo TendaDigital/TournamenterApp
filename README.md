@@ -1,5 +1,5 @@
 # Tournamenter App
-[![Build Status](https://travis-ci.org/ivanseidel/TournamenterApp.svg?branch=master)](https://travis-ci.org/ivanseidel/TournamenterApp) [![Build status](https://ci.appveyor.com/api/projects/status/kip5669pxyqr23jg?svg=true)](https://ci.appveyor.com/project/ivanseidel/tournamenterapp)
+[![Build Status](https://travis-ci.org/ivanseidel/TournamenterApp.svg?branch=deploy)](https://travis-ci.org/ivanseidel/TournamenterApp) [![Build status](https://ci.appveyor.com/api/projects/status/kip5669pxyqr23jg/branch/deploy?svg=true)](https://ci.appveyor.com/project/ivanseidel/tournamenterapp/branch/deploy)
 
 
 This project is an wrapper for the [Tournamenter](https://github.com/ivanseidel/tournamenter)
