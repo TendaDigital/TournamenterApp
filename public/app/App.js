@@ -3,6 +3,7 @@ angular.module('App', [
 
   'Panel',
   'Window',
+  'Notify',
   'Common',
   'GenericFileModel',
 
@@ -60,7 +61,9 @@ angular.module('App', [
   // Override 'on' method to listen to $scope and stop listening on destroy
   service.on = function ($scope, channel, callback) {
     ipcRenderer.on(channel, callback)
-    $scope.$on('$destroy', handler);
+
+    // Set destroy handler only if scope is defined
+    $scope && $scope.$on('$destroy', handler);
 
     // Remove listener
     function handler(){
@@ -111,6 +114,8 @@ angular.module('App', [
 
 .controller('AppCtrl', function ($timeout, $scope) {
   $scope._loaded = false;
+
+  $scope.version = require('electron').remote.app.getVersion();
 
   $scope.openExternal = function openExternal(link){
     const {shell} = require('electron');
