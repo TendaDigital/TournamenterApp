@@ -30,7 +30,9 @@
     "app-category-type": "public.app-category.productivity",
     "mac": {
       "title": "Tournamenter Manager",
-      "target": ["dmg"],
+      "target": [
+        "dmg"
+      ],
       "icon-size": 120,
       "icon": "build/icon.icns"
     },
@@ -51,7 +53,9 @@
       ]
     },
     "win": {
-      "target": ["squirrel"],
+      "target": [
+        "squirrel"
+      ],
       "iconUrl": "https://raw.githubusercontent.com/ivanseidel/TournamenterApp/master/build/icon.ico",
       "icon": "build/icon.ico",
       "msi": false
@@ -67,6 +71,7 @@
     "forever-monitor": "^1.7.0",
     "kerberos": "0.0.21",
     "lodash": "^4.13.1",
+    "npm": "^3.10.5",
     "tournamenter": "git+https://github.com/ivanseidel/Tournamenter.git"
   },
   "devDependencies": {
