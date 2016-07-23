@@ -114,3 +114,63 @@
   padding-left: 16px;
   padding-right: 16px;
 }
+
+
+/*
+  Extension panel
+*/
+.installing > .extensions-panel{
+  opacity: 0.5;
+}
+
+.extensions-panel h5{
+  margin: 8px 0;
+}
+
+.extensions-panel .description{
+  margin-top: 8px;
+  font-size: 12px;
+  color: #949494;
+}
+
+/*
+  Extension window
+*/
+md-progress-circular.white path{
+  stroke: #999;
+}
+
+.extension-card {
+  margin: 16px;
+  padding: 16px;
+  border-radius: 4px;
+
+  border: 1px solid #CCC;
+  background-color: #F0F0F0;
+}
+
+.extension-card:hover {
+  background-color: #E9E9E9;
+  cursor: pointer;
+}
+
+.extension-card h3{
+  margin: 0;
+  color: #2c80d2;
+}
+
+.extension-card p{
+  font-size: 12px;
+  color: #999;
+}
+
+.extension-card .version{
+  text-align: right;
+  font-size: 12px;
+  color: #666;
+}
+
+.extension-card .author{
+  font-size: 12px;
+  color: #2c80d2;
+}

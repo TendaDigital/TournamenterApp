@@ -59,7 +59,8 @@ exports.start = function (serverId, cb) {
   let tournamenterScript = path.basename(tournamenterModule);
   let tournamenterDir = path.dirname(tournamenterModule);
 
-  exports.emitLog(serverId, 'launch', tournamenterScript, tournamenterDir);
+  // Emit a debug log
+  exports.emitLog(serverId, 'server', `Starting new server: ${serverId}`);
 
   // Prepare instance options
   let opts = {
@@ -103,8 +104,12 @@ exports.start = function (serverId, cb) {
 
 // Stops a server
 exports.stop = function (serverId) {
-  if(serverId in exports._instances)
+  if(serverId in exports._instances){
+    // Emit a debug log
+    exports.emitLog(serverId, 'server', `Killing server: ${serverId}`);
+
     exports._instances[serverId].kill(true);
+  }
 }
 
 

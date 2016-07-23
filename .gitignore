@@ -2,7 +2,7 @@
 *.swo
 *.DS_Store
 *.pyc
-npm-debug.log
+npm-debug.log*
 
 output/
 tests/

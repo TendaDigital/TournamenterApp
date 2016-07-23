@@ -1,5 +1,6 @@
 angular.module('App', [
   'ServerRunner',
+  'ExtensionManager',
 
   'Panel',
   'Window',
@@ -7,6 +8,7 @@ angular.module('App', [
   'Common',
   'GenericFileModel',
 
+  'luegg.directives',
   'ngMaterial',
   'ngAnimate',
 	'ui.router',
