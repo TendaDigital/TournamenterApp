@@ -152,6 +152,7 @@ angular.module('ServerRunner', [
 
   // Keep logs here
   $scope.logs = [];
+  let logsBuffer = [];
 
   // Called from view to set this window data
   $scope.init = function (_win){
@@ -242,6 +243,10 @@ angular.module('ServerRunner', [
   $scope.changeServerState = function (){
     // console.log($scope.serverUp);
     if($scope.serverUp){
+      // Clear logs prior to starting
+      $scope.logs = [];
+      logsBuffer = [];
+
       ServerService.start($scope.serverId);
     }else{
       ServerService.stop($scope.serverId);
@@ -297,16 +302,24 @@ angular.module('ServerRunner', [
 
   // Update logs (pushes to log array and limits it's content)
   let counter = 1;
-  function updateLogs(evt, type, message){
-    $scope.logs.push([counter++, type, message]);
+
+  var refreshLogs = _.throttle(()=>{
+    $scope.logs.push(...logsBuffer);
+    logsBuffer = [];
 
     // Limit logs
     if($scope.logs.length > MAX_LOG_COUNT)
-      $scope.logs.splice(0, logs.length - MAX_LOG_COUNT);
+      $scope.logs.splice(0, $scope.logs.length - MAX_LOG_COUNT);
 
     // Apply changes to scope if not in digest phase
     if(!$scope.$$phase)
       $scope.$apply();
+  }, 100)
+
+  function updateLogs(evt, type, message){
+    logsBuffer.push([counter++, type, message]);
+
+    refreshLogs();
   }
 
 })
