@@ -1,5 +1,6 @@
 angular.module('App', [
   'ServerRunner',
+  'ExtensionManager',
 
   'Panel',
   'Window',

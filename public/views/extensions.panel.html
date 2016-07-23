@@ -1,0 +1,42 @@
+<div ng-controller="ExtensionsPanelCtrl">
+
+  <!-- Extension List -->
+  <md-list ng-cloak style="padding: 0;"
+    ng-class="{installing: executing}">
+
+    <md-list-item class="secondary-button-padding">
+      <div flex style="line-height: 1.2; font-size: 14px; margin: 8px 16px;">
+        Installed: <small class="label" style="background-color: #999;">
+          {{ extensions.length }}
+        </small>
+      </div>
+
+      <div>
+        <md-button class="md-primary" ng-click="openExtensionManager()">
+          <md-icon md-font-icon="mdi mdi-settings"></md-icon>
+          Configure
+        </md-button>
+      </div>
+
+      <md-divider></md-divider>
+    </md-list-item>
+
+    <md-list-item class="secondary-button-padding extensions-panel"
+      ng-repeat="extension in extensions track by extension.name">
+
+      <div flex style="line-height: 1.2; margin: 8px 8px 8px 0;">
+        <h5>{{ extension.name }}</h5>
+        <div class="description">{{ extension.description }}</div>
+      </div>
+      <!-- <flex></flex> -->
+
+      <div style="font-size: 14px;">
+        v{{ extension.version }}
+      </div>
+
+      <md-divider ng-if="!$last"></md-divider>
+    </md-list-item>
+  </md-list>
+
+
+</div>

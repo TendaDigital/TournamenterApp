@@ -54,3 +54,87 @@ md-input-container{
   color: #457afb;
   text-decoration: none;
 }
+
+
+/*
+  Label
+*/
+.label {
+  padding: 4px 8px;
+  border-radius: 8px;
+
+  color: #FFF;
+  background-color: #555;
+}
+
+/*
+  Compacter button
+*/
+.md-compact {
+  margin: 0;
+  height: 24px;
+  line-height: 24px;
+  min-height: auto;
+  font-size: 12px;
+}
+
+/*
+  Log bar
+*/
+.logger-bar {
+  transition: 0.2s background ease-in-out;
+  box-shadow: 0 -1px rgba(255, 255, 255, 0.15);
+  background-color: rgba(48,48,48,0.95) !important;
+}
+
+.logger-bar:not(.open):hover {
+  background-color: rgba(48,48,48, 0.9) !important;
+}
+
+.logger-bar .opener{
+  box-shadow: 0 -1px rgba(255, 255, 255, 0.10);
+  cursor: pointer;
+  z-index: 1;
+}
+
+.logger-bar .opener:focus{
+  outline: 0;
+}
+
+.logger-bar .logs{
+  transition: 0.6s height ease-in-out;
+}
+
+.logger-bar .logs:not(.opened){
+  height: 0px !important;
+}
+
+.logger-bar .logs-container {
+  padding: 16px;
+}
+
+.logger-bar .logs-container > pre{
+  margin: 0;
+  white-space: pre-wrap;       /* Since CSS 2.1 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+.logger-bar .logs-container > pre.error{
+  color: #ff5151;
+  font-weight: bold;
+}
+
+.logger-bar .logs-container > pre.server{
+  color: #51ff51;
+}
+
+.logger-bar .logs-container > pre.warn{
+  color: #ffdc51;
+}
+
+.logger-bar .logs-container > pre.debug{
+  color: #888888;
+}

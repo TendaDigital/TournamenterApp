@@ -1,0 +1,103 @@
+<md-content ng-controller="ExtensionsWindowCtrl"
+  layout-fill ng-init="init(win)"
+  class="servers-window">
+  <md-content layout="row" md-theme="dark" style="padding: 8px 16px;"
+    >
+    <h4>
+      Installed extensions:
+      <small class="label">{{extensions.length}}</small>
+    </h4>
+
+    <div flex></div>
+
+    <div layout="row" layout-align="center center" ng-show="executing">
+      <div style="font-size: 12px; margin: 8px 16px; color: #999;">
+        Executing command...
+      </div>
+      <md-progress-circular md-mode="indeterminate" class="white"
+        md-diameter="28px">
+      </md-progress-circular>
+    </div>
+  </md-content>
+
+  <!-- Log bar -->
+  <md-content layout="column" md-theme="dark" class="logger-bar"
+    ng-init="logsOpen=false">
+
+    <md-content layout="column" class="logs" style="height: 200px;"
+      ng-class="{opened: logsOpen}">
+
+      <div class="logs-container">
+        <pre ng-repeat="log in logs track by log[0]" ng-class="log[1]">{{::log[2]}}</pre>
+      </div>
+
+    </md-content>
+
+    <!-- Opener -->
+    <div layout="row" layout-align="center center" class="opener"
+      ng-click="logsOpen = !logsOpen;">
+      <md-icon md-font-icon="mdi mdi-chevron-down" ng-hide="logsOpen"></md-icon>
+      <md-icon md-font-icon="mdi mdi-chevron-up"   ng-show="logsOpen"></md-icon>
+    </div>
+  </md-content>
+
+
+  <!-- Install box -->
+  <div layout="row" style="margin: 24px 16px;">
+    <md-input-container class="md-block" flex style="margin-right: 16px;">
+      <label>Enter npm package name or GitHub URL</label>
+      <input ng-model="extensionName">
+    </md-input-container>
+
+    <div layout="row" layout-align="center end">
+      <md-button class="md-raised md-primary md-compact"
+        ng-disabled="extensionName.length < 3 || executing"
+        ng-click="installExtension(extensionName)">
+        Install
+      </md-button>
+    </div>
+  </div>
+
+  <!-- No installed extensions -->
+  <md-whiteframe class="extension-card" layout="row" ng-hide="extensions.length">
+    <p style="font-size: 24px; text-align: center; width: 100%;">
+      You have no installed extensions, yet.
+    </p>
+  </md-whiteframe>
+
+
+  <!-- Instaled extensions -->
+  <md-whiteframe class="extension-card" layout="row"
+    ng-repeat="extension in extensions track by extension.name">
+
+    <div layout="column" flex>
+      <h3>{{ extension.name }}</h3>
+      <p>{{ extension.description }}</p>
+      <div class="author" layout-align="center center">
+        {{ extension.author.name ? 'by '+extension.author.name : ''}}
+      </div>
+    </div>
+
+
+    <div layout="column">
+      <div class="version">
+        <md-icon md-font-icon="mdi mdi-layers"></md-icon>
+        <span>v{{ extension.version }}</span>
+      </div>
+      <div flex></div>
+      <div layout="row">
+        <md-button class="md-raised md-primary md-compact"
+          ng-disabled="executing"
+          ng-click="installExtension(extension.name)"
+          style="margin-right: 4px;">
+          Update
+        </md-button>
+        <md-button class="md-raised md-warn md-compact"
+          ng-disabled="executing"
+          ng-click="removeExtension(extension.name)">
+          Uninstall
+        </md-button>
+      </div>
+    </div>
+  </md-whiteframe>
+</md-content>
