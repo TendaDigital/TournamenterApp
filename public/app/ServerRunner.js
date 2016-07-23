@@ -135,6 +135,7 @@ angular.module('ServerRunner', [
 //
 .controller('ServerWindowCtrl', function ($scope, GenericFileModel,
   ServerService, Dialogs, WindowService) {
+  const MAX_LOG_COUNT = 2000;
 
   var win = null;
 
@@ -148,6 +149,9 @@ angular.module('ServerRunner', [
   $scope.serverId = null;
 
   $scope.needsSave = false;
+
+  // Keep logs here
+  $scope.logs = [];
 
   // Called from view to set this window data
   $scope.init = function (_win){
@@ -291,8 +295,18 @@ angular.module('ServerRunner', [
     })
   }
 
+  // Update logs (pushes to log array and limits it's content)
+  let counter = 1;
   function updateLogs(evt, type, message){
-    console.log(`[${$scope.serverId}]`, type, ':', message);
+    $scope.logs.push([counter++, type, message]);
+
+    // Limit logs
+    if($scope.logs.length > MAX_LOG_COUNT)
+      $scope.logs.splice(0, logs.length - MAX_LOG_COUNT);
+
+    // Apply changes to scope if not in digest phase
+    if(!$scope.$$phase)
+      $scope.$apply();
   }
 
 })

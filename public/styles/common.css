@@ -141,7 +141,7 @@ md-input-container{
 }
 
 .logger-bar .logs-container > pre.debug{
-  color: #888888;
+  color: #d2d2d2;
 }
 
 .logger-bar .lock-down{

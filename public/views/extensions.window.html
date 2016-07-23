@@ -21,7 +21,7 @@
   </md-content>
 
   <!-- Log bar -->
-  <md-content layout="column" md-theme="dark" class="logger-bar"
+  <md-content layout="column" md-theme="dark" class="logger-bar dark"
     ng-init="logsOpen=false; glued = true;">
 
     <md-content layout="column" class="logs" style="height: 200px;"
@@ -29,7 +29,7 @@
 
 
       <div class="logs-container">
-        <pre ng-repeat="log in logs track by log[0]" ng-class="log[1]">{{::log[2]}}</pre>
+        <pre ng-repeat="log in logs track by log[0]" ng-class="::log[1]">{{::log[2]}}</pre>
       </div>
 
     </md-content>
