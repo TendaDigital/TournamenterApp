@@ -23,7 +23,8 @@
     "angular-animate": "^1.5.6",
     "angular-ui-router": "^0.3.1",
     "ngFx": "^1.1.0",
-    "mdi": "^1.6.50"
+    "mdi": "^1.6.50",
+    "angular-scroll-glue": "^2.0.7"
   },
   "install": {
     "path": "public/components",
