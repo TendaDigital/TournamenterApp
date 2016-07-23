@@ -22,10 +22,11 @@
 
   <!-- Log bar -->
   <md-content layout="column" md-theme="dark" class="logger-bar"
-    ng-init="logsOpen=false">
+    ng-init="logsOpen=false; glued = true;">
 
     <md-content layout="column" class="logs" style="height: 200px;"
-      ng-class="{opened: logsOpen}">
+      ng-class="{opened: logsOpen}" scroll-glue="glued">
+
 
       <div class="logs-container">
         <pre ng-repeat="log in logs track by log[0]" ng-class="log[1]">{{::log[2]}}</pre>
@@ -33,11 +34,19 @@
 
     </md-content>
 
+    <!-- Scroll lock button -->
+    <div class="lock-down" ng-hide="glued" ng-click="glued = true;">
+      <md-icon md-font-icon="mdi mdi-chevron-double-down"></md-icon>
+    </div>
+
     <!-- Opener -->
     <div layout="row" layout-align="center center" class="opener"
       ng-click="logsOpen = !logsOpen;">
+      <div flex></div>
       <md-icon md-font-icon="mdi mdi-chevron-down" ng-hide="logsOpen"></md-icon>
       <md-icon md-font-icon="mdi mdi-chevron-up"   ng-show="logsOpen"></md-icon>
+      <span class="opener-info">Logs ({{logs.length}})</span>
+      <div flex></div>
     </div>
   </md-content>
 

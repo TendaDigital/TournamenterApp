@@ -101,6 +101,11 @@ md-input-container{
   outline: 0;
 }
 
+.logger-bar .opener-info {
+  font-size: 10px;
+  color: #999;
+}
+
 .logger-bar .logs{
   transition: 0.6s height ease-in-out;
 }
@@ -137,4 +142,20 @@ md-input-container{
 
 .logger-bar .logs-container > pre.debug{
   color: #888888;
+}
+
+.logger-bar .lock-down{
+  position: absolute;
+  bottom: 32px;
+  right: 8px;
+  font-size: 24px;
+  background-color: #defb4c;
+  border-radius: 3px;
+  width: 24px;
+  height: 24px;
+  line-height: 20px;
+}
+
+.logger-bar .lock-down > md-icon{
+  color: #525252;
 }
