@@ -25,6 +25,9 @@ exports.init = function (){
   // Initialize GenericFileModel
   app.controllers.GenericFileModel.init();
 
+  // Initialize extensions manager
+  app.controllers.ExtensionManager.init();
+
   // Initialize ServerRunner
   app.controllers.ServerRunner.init();
 
