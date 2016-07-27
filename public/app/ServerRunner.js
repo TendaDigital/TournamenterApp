@@ -2,6 +2,8 @@ angular.module('ServerRunner', [
   'Panel',
   'Window',
   'Common',
+
+  'ExtensionManager',
 ])
 
 .run(function ($rootScope, PanelService, ServerService, GenericFileModel, Dialogs) {
@@ -134,7 +136,7 @@ angular.module('ServerRunner', [
 // Configures a server and enables to start/stop
 //
 .controller('ServerWindowCtrl', function ($scope, GenericFileModel,
-  ServerService, Dialogs, WindowService) {
+  ServerService, Dialogs, WindowService, ExtensionManagerService) {
   const MAX_LOG_COUNT = 2000;
 
   var win = null;
@@ -149,6 +151,9 @@ angular.module('ServerRunner', [
   $scope.serverId = null;
 
   $scope.needsSave = false;
+
+  // Holds list of extensions
+  $scope.extensions = null;
 
   // Keep logs here
   $scope.logs = [];
@@ -288,6 +293,7 @@ angular.module('ServerRunner', [
     $scope.configs = _.defaults(configs || {}, {
       minUptime: 2000,
       spinSleepTime: 2000,
+      extensions: {},
     })
 
     // Apply defaults on `env`
@@ -320,6 +326,18 @@ angular.module('ServerRunner', [
     logsBuffer.push([counter++, type, message]);
 
     refreshLogs();
+  }
+
+  // Update extension listing
+  updateExtensions()
+  ExtensionManagerService.subscribe($scope, 'update', updateExtensions)
+
+  function updateExtensions(){
+    $scope.extensions = ExtensionManagerService.list();
+
+    // Apply changes to scope if not in digest phase
+    if(!$scope.$$phase)
+      $scope.$apply();
   }
 
 })

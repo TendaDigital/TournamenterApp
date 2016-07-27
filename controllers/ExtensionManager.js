@@ -64,6 +64,27 @@ exports.getInstallPath = function () {
   return path.join(electron.app.getPath('userData'), 'extensions');
 }
 
+//
+// Given a list of extension names, returns a list of paths to the extensions
+//
+exports.getExtensionsPaths = function (extensions) {
+  // Filter extensions
+  if(!_.isArray(extensions))
+    extensions = [];
+
+  let paths = [];
+  extensions.forEach(ext => {
+    ext = exports.get(ext);
+
+    // Skip if didn't found extension
+    if(!ext) return;
+
+    // Add to the paths list
+    paths.push(ext.path);
+  })
+
+  return paths;
+}
 
 //
 // List packages with it's `package.js` information
@@ -97,9 +118,13 @@ exports.list = function () {
   let extensions = folders.map((folder) => {
     // Read file and parse json
     try{
-      let filePath = path.join(installPath, folder, 'package.json');
+      let folderPath = path.join(installPath, folder);
+      let filePath = path.join(folderPath, 'package.json');
       var json = fs.readFileSync(filePath).toString();
       json = JSON.parse(json);
+
+      // Include folderPath in object (saves the folder location)
+      json.path = folderPath;
     }catch(e){
       return null;
     }
@@ -128,6 +153,8 @@ exports.list = function () {
   // Select only important keys in each extension
   extensions = extensions.map((extension) => {
     return _.pick(extension, [
+      'path',
+
       'name',
       'author',
       'gitHead',
