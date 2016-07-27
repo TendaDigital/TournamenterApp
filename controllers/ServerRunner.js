@@ -43,6 +43,8 @@ exports.init = function (){
 
 // Starts a server
 exports.start = function (serverId, cb) {
+  const ExtensionManager = app.controllers.ExtensionManager;
+
   var isStarted = serverId in exports._instances && exports._instances[serverId];
 
   if(isStarted)
@@ -62,6 +64,18 @@ exports.start = function (serverId, cb) {
   // Emit a debug log
   exports.emitLog(serverId, 'server', `Starting new server: ${serverId}`);
 
+  // Gatter extensions used and join paths with `:`
+  let extensions = optsDb.extensions || {}
+  extensions = _.pickBy(extensions, v => v)
+  extensions = _.keys(extensions)
+
+  // Log it
+  if(extensions.length > 0)
+    exports.emitLog(serverId, 'server', `Use: ${extensions.join(',')}`);
+
+  extensions = ExtensionManager.getExtensionsPaths(extensions);
+  extensions = extensions.join(':');
+
   // Prepare instance options
   let opts = {
     max: 0,
@@ -79,6 +93,7 @@ exports.start = function (serverId, cb) {
       APP_NAME: 'Tournamenter',
       APP_UID: serverId,
       ELECTRON_RUN_AS_NODE: 1,
+      TOURNAMENTER_EXTENSIONS: extensions,
     }),
   };
 

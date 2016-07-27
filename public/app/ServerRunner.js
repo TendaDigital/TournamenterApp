@@ -2,6 +2,8 @@ angular.module('ServerRunner', [
   'Panel',
   'Window',
   'Common',
+
+  'ExtensionManager',
 ])
 
 .run(function ($rootScope, PanelService, ServerService, GenericFileModel, Dialogs) {
@@ -134,7 +136,7 @@ angular.module('ServerRunner', [
 // Configures a server and enables to start/stop
 //
 .controller('ServerWindowCtrl', function ($scope, GenericFileModel,
-  ServerService, Dialogs, WindowService) {
+  ServerService, Dialogs, WindowService, ExtensionManagerService) {
   const MAX_LOG_COUNT = 2000;
 
   var win = null;
@@ -150,8 +152,12 @@ angular.module('ServerRunner', [
 
   $scope.needsSave = false;
 
+  // Holds list of extensions
+  $scope.extensions = null;
+
   // Keep logs here
   $scope.logs = [];
+  let logsBuffer = [];
 
   // Called from view to set this window data
   $scope.init = function (_win){
@@ -242,6 +248,10 @@ angular.module('ServerRunner', [
   $scope.changeServerState = function (){
     // console.log($scope.serverUp);
     if($scope.serverUp){
+      // Clear logs prior to starting
+      $scope.logs = [];
+      logsBuffer = [];
+
       ServerService.start($scope.serverId);
     }else{
       ServerService.stop($scope.serverId);
@@ -283,6 +293,7 @@ angular.module('ServerRunner', [
     $scope.configs = _.defaults(configs || {}, {
       minUptime: 2000,
       spinSleepTime: 2000,
+      extensions: {},
     })
 
     // Apply defaults on `env`
@@ -297,12 +308,32 @@ angular.module('ServerRunner', [
 
   // Update logs (pushes to log array and limits it's content)
   let counter = 1;
-  function updateLogs(evt, type, message){
-    $scope.logs.push([counter++, type, message]);
+
+  var refreshLogs = _.throttle(()=>{
+    $scope.logs.push(...logsBuffer);
+    logsBuffer = [];
 
     // Limit logs
     if($scope.logs.length > MAX_LOG_COUNT)
-      $scope.logs.splice(0, logs.length - MAX_LOG_COUNT);
+      $scope.logs.splice(0, $scope.logs.length - MAX_LOG_COUNT);
+
+    // Apply changes to scope if not in digest phase
+    if(!$scope.$$phase)
+      $scope.$apply();
+  }, 100)
+
+  function updateLogs(evt, type, message){
+    logsBuffer.push([counter++, type, message]);
+
+    refreshLogs();
+  }
+
+  // Update extension listing
+  updateExtensions()
+  ExtensionManagerService.subscribe($scope, 'update', updateExtensions)
+
+  function updateExtensions(){
+    $scope.extensions = ExtensionManagerService.list();
 
     // Apply changes to scope if not in digest phase
     if(!$scope.$$phase)

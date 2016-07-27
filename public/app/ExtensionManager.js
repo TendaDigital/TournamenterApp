@@ -47,7 +47,7 @@ angular.module('ExtensionManager', [
 
 .controller('ExtensionsWindowCtrl', function ($scope, ExtensionManagerService){
   const MAX_LOG_COUNT = 1000;
-  
+
   // `extensions` holds the list of all servers
   $scope.extensions = null;
 
@@ -136,7 +136,6 @@ angular.module('ExtensionManager', [
   ExtensionManagerService.subscribe($scope, 'executing', update);
 
   function update(){
-    console.log('update');
     $scope.extensions = ExtensionManagerService.list();
     $scope.executing = ExtensionManagerService.isExecuting();
 

@@ -104,6 +104,19 @@
       </md-input-container>
     </div>
 
+    <div layout="column">
+      <h5>Use Extensions</h5>
+
+      <md-switch
+        style="margin: 4px 0;"
+        aria-label="Enable extension"
+        ng-disabled="serverUp"
+        ng-repeat="extension in extensions track by extension.name"
+        ng-model="configs.extensions[extension.name]">
+        {{ extension.name }}
+      </md-switch>
+    </div>
+
     <div layout="row">
       <div flex></div>
       <md-button ng-disabled="serverUp" ng-click="deleteServer(true)" class="md-warn md-raised">
