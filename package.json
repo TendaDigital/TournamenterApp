@@ -77,6 +77,7 @@
   "devDependencies": {
     "bower": "latest",
     "bower-installer": "latest",
+    "electron": "^0.4.1",
     "electron-builder": "^5.12.1",
     "electron-prebuilt": "^1.2.6",
     "rimraf": "^2.5.3"
