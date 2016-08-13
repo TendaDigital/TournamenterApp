@@ -331,6 +331,7 @@ angular.module('ServerRunner', [
   // Update extension listing
   updateExtensions()
   ExtensionManagerService.subscribe($scope, 'update', updateExtensions)
+  ExtensionManagerService.subscribe($scope, 'executing', updateExtensions)
 
   function updateExtensions(){
     $scope.extensions = ExtensionManagerService.list();
