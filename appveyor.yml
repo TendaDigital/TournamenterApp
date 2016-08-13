@@ -16,7 +16,7 @@ install:
   - ps: Install-Product node 6 x64
   - git reset --hard HEAD
   - npm install npm -g
-  - npm install electron-builder@next electron
+  - npm install electron-builder@5.12.1
   - npm install
   - npm install tournamenter
   - npm prune
