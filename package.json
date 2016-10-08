@@ -10,7 +10,7 @@
   "homepage": "https://github.com/ivanseidel/TournamenterApp",
   "repository": "https://github.com/ivanseidel/TournamenterApp",
   "license": "MIT",
-  "version": "1.2.2",
+  "version": "1.3.0",
   "README": "none",
   "engines": {
     "node": "0.12.x"
@@ -26,7 +26,7 @@
   },
   "build": {
     "appId": "com.tournamenter",
-    "asar": false,
+    "asar": true,
     "app-category-type": "public.app-category.productivity",
     "mac": {
       "title": "Tournamenter Manager",
