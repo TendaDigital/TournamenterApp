@@ -26,7 +26,7 @@
   },
   "build": {
     "appId": "com.tournamenter",
-    "asar": false,
+    "asar": true,
     "app-category-type": "public.app-category.productivity",
     "mac": {
       "title": "Tournamenter Manager",
