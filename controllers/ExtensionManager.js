@@ -279,7 +279,7 @@ exports.runNpm = function (params, cb){
   var proc = fork(npmCli, params, {
     silent: true,
     detached: true,
-    stdio: [ 'ignore', 'ignore', 'ignore', 'ignore'],
+    stdio: [ 'pipe', 'pipe', 'pipe', 'ipc'],
   });
 
   // Wait process to exit
