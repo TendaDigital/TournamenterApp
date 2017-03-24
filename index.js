@@ -51,6 +51,9 @@ var configSetps = [
 
   // Initialize electron
   require('./config/electron'),
+
+  // Initialize application menu
+  require('./config/menu'),
 ];
 
 // Configure steps and initialize
