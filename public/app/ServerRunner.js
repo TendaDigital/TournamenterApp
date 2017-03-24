@@ -231,7 +231,7 @@ angular.module('ServerRunner', [
     let imagePath = dialog.showOpenDialog({
       title: 'Select a place to store the DB',
       defaultPath: $scope.configs.env.DB_FOLDER || undefined,
-      properties: ['openDirectory'],
+      properties: ['openDirectory', 'openFile'],
     });
 
     // Select imagePath
@@ -301,7 +301,7 @@ angular.module('ServerRunner', [
       APP_NAME: $scope.serverId,
       APP_LOGO: '',
       PASSWORD: '',
-      DB_FOLDER: app.getPath('userData'),
+      DB_FOLDER: require('path').join(app.getPath('userData'), $scope.serverId + '.db'),
       PORT: 3000,
     })
   }
