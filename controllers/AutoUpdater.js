@@ -11,7 +11,7 @@ exports.init = function init(window) {
     return
   }
 
-  if(os.platform() !== 'darwin' && os.platform() !== 'win32') {
+  if(os.platform() !== 'win32') {
     console.log(TAG, chalk.gray('Skip AutoUpdater. running on ' + os.platform()));
     return;
   }
