@@ -6,14 +6,14 @@
     "url": "https://github.com/ivanseidel"
   },
   "productName": "Tournamenter",
-  "description": "Tournamenter Manager",
+  "description": "Manage instances of Tournamenter",
   "homepage": "https://github.com/ivanseidel/TournamenterApp",
   "repository": "https://github.com/ivanseidel/TournamenterApp",
   "license": "MIT",
   "version": "1.3.2",
   "README": "none",
   "engines": {
-    "node": "6.9.1"
+    "node": "6.10.1"
   },
   "main": "index.js",
   "scripts": {
