@@ -11,7 +11,7 @@ var ENV = process.env.NODE_ENV || 'development';
 var enviroment = require('./env/'+ENV);
 
 var defaults = {
-  root: path.normalize(__dirname + '/..'),
+  root: path.normalize(path.join(__dirname, '/..')),
   env: ENV,
 };
 
