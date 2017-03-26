@@ -77,8 +77,8 @@
     "bower": "latest",
     "bower-installer": "latest",
     "electron": "^1.6.2",
-    "electron-builder": "^7.10.3",
-    "electron-prebuilt": "^1.2.6",
+    "electron-builder": "^8.7.0",
+    "electron-prebuilt": "^1.6.2",
     "rimraf": "^2.5.3"
   }
 }
