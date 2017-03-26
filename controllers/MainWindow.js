@@ -16,7 +16,9 @@ exports.launch = function (){
 
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 800,
+    minWidth: 850,
+    minHeight: 600,
+    width: 850,
     height: 600,
     icon: app.config.icon,
   })

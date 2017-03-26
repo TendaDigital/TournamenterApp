@@ -9,7 +9,7 @@
       class="md-warn" md-no-ink
       ng-disabled="!serverUp && needsSave"
       aria-label="Start server">
-      {{statusString}}
+      {{statusString}} <small>{{needsSave ? '(Save before running)' : ''}}</small>
     </md-switch>
     <div flex></div>
 
