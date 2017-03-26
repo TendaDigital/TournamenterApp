@@ -121,7 +121,7 @@ angular.module('ServerRunner', [
     $scope.serversPorts = {};
     for(var k in $scope.servers){
       let id = $scope.servers[k];
-      let server = GenericFileModel.get('servers', id);
+      let server = GenericFileModel.get('servers', id) || {};
       $scope.serversPorts[id] = server.env ? server.env.PORT : '[No Port]';
     }
 
@@ -182,6 +182,13 @@ angular.module('ServerRunner', [
   $scope.save = function save(){
     GenericFileModel.save('servers', $scope.serverId, $scope.configs);
     $scope.needsSave = false;
+  }
+
+  // Opens a external browser window with the app
+  $scope.openApp = function save(){
+    var shell = require('electron').shell
+    var url = 'http://localhost:' + $scope.configs.env.PORT
+    shell.openExternal(url);
   }
 
   // Removes this server
@@ -289,21 +296,8 @@ angular.module('ServerRunner', [
     if(!configs.env)
       $scope.needsSave = true;
 
-    // Set defaults on load
-    $scope.configs = _.defaults(configs || {}, {
-      minUptime: 2000,
-      spinSleepTime: 2000,
-      extensions: {},
-    })
-
-    // Apply defaults on `env`
-    $scope.configs.env = _.defaults(configs.env || {}, {
-      APP_NAME: $scope.serverId,
-      APP_LOGO: '',
-      PASSWORD: '',
-      DB_FOLDER: require('path').join(app.getPath('userData'), $scope.serverId + '.db'),
-      PORT: 3000,
-    })
+    // Save configs to scope
+    $scope.configs = configs || {}
   }
 
   // Update logs (pushes to log array and limits it's content)

@@ -1,11 +1,10 @@
 'use strict';
 var TAG = _TAG('config.helpers');
 
-var fs = require('fs');
 var path = require('path');
 
 // Load instantly, so that files can access helpers directly on root scope
-var helpersDirectory = __dirname + '/..' + '/helpers/';
+var helpersDirectory = path.join(__dirname, '/../helpers/');
 
 app.helpers = {};
 

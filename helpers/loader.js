@@ -14,12 +14,15 @@ exports.load = function loadModules (dir, loaded){
   // Default to creat a new object
   loaded = (typeof loaded) == 'object' ? loaded : {};
 
+  // Fix for lookup inside asar: Remove last '/' if exist.
+  dir = dir.replace(/[\\/]$/, '')
+
   // Read all files from that path and load into modules
   fs.readdirSync(dir).forEach(function (file) {
-		if (file.indexOf('.js') < 0)
+		if (!file.endsWith('.js'))
 			return;
 
-		var mod = require(dir + file);
+		var mod = require(path.join(dir, file));
 		var name = path.basename(file, '.js');
 
 		loaded[name] = mod;

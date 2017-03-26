@@ -11,7 +11,7 @@ module.exports = function config(app, next){
     submenu: [
       { label: 'About Application', selector: 'orderFrontStandardAboutPanel:' },
       { type: 'separator' },
-      { label: 'Quit', accelerator: 'Command+Q', click: function() { app.quit(); }}
+      { label: 'Quit', accelerator: 'Command+Q', click: function() { eApp.quit(); }}
     ]}, {
     label: 'Edit',
     submenu: [

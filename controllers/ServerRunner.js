@@ -39,6 +39,33 @@ exports.init = function (){
       instance.kill(true);
     }
   })
+
+  // Initialize collections
+  app.controllers.GenericFileModel.createCollection('servers', {
+
+    // Called on save, to apply defaults
+    beforeSave: function (id, data) {
+      data = data || {}
+
+      // Defalts on process options
+      data = _.defaults(data, {
+        extensions: {},
+      })
+
+      // Defaults on Environment vars
+      data.env = _.defaults(data.env, {
+        APP_NAME: id,
+        APP_LOGO: '',
+        PASSWORD: '',
+        DB_FOLDER: path.join(eApp.getPath('userData'), id + '.db'),
+        // TODO: Improve default port selection
+        PORT: 3000 + Math.round(Math.random(1000)),
+      })
+      console.log('new data', data)
+
+      return data
+    }
+  });
 }
 
 // Starts a server
@@ -78,29 +105,30 @@ exports.start = function (serverId, cb) {
 
   // Prepare instance options
   let opts = {
-    max: 0,
-    uid: serverId,
+    max: 5,
+    uid: `Tournamenter ${serverId}`,
     silent: true,
     killTree: true,
     // command: 'node',
     // fork: true,
     // cwd: path.join(__dirname, '../'),
 
-    minUptime: optsDb.minUptime || 2000,
-    spinSleepTime: optsDb.spinSleepTime || 2000,
+    minUptime: 5000,
+    spinSleepTime: 2000,
 
     env: _.defaults(optsDb.env, {
       APP_NAME: 'Tournamenter',
       APP_UID: serverId,
+      TMP_PATH: path.join(eApp.getPath('temp'), 'tournamenter_' + serverId),
       ELECTRON_RUN_AS_NODE: 1,
       TOURNAMENTER_EXTENSIONS: extensions,
     }),
   };
 
   // Launch server
-  // let electronpath = require('electron-prebuilt');
   let child = new (forever.Monitor)(tournamenterModule, opts);
-  // let child = new require('child_process').fork(tournamenterModule);
+
+  // Save spawned process to instances array
   exports._instances[serverId] = child;
 
   // Bind events
@@ -123,6 +151,8 @@ exports.stop = function (serverId) {
     // Emit a debug log
     exports.emitLog(serverId, 'server', `Killing server: ${serverId}`);
 
+    // Flag indicating stop will occur
+    exports._instances[serverId].willStop = true;
     exports._instances[serverId].kill(true);
   }
 }
@@ -168,15 +198,34 @@ exports._bindEvents = function (serverId, child) {
   child.on('restart', () => {
     // child.STATE = 'START';
     exports.emitUpdate(serverId);
+
+    // Notify application
+    if (!child.willStop) {
+      eApp.dock && eApp.dock.bounce()
+
+      app.controllers.MainWindow.notify(
+        'Server Crashed',
+        `WARNING: Server '${serverId}' crashed for the ${child.times} time. Re-spawning...`,
+        'OK');
+    }
   })
 
-  child.on('exit', () => {
+  child.on('exit', (code) => {
     // child.STATE = null;
     // Destroy instance
     delete exports._instances[serverId];
 
     // Emits the destroyed instance
     exports.emitUpdate(serverId);
+
+    // If it did crash, notify application
+    if (!child.willStop) {
+      eApp.dock && eApp.dock.bounce('critical')
+      app.controllers.MainWindow.notify(
+        'Server Crashed',
+        `WARNING: Server '${serverId}' crashed. Open the server logs for more info.`,
+        'OK');
+    }
   })
 
   // Logs handling

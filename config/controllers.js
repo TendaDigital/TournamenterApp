@@ -1,8 +1,10 @@
 'use strict';
 var TAG = _TAG('config.controllers');
 
+var path = require('path');
+
 function config(app, next){
-	var controllersDirectory = __dirname + '/..' + '/controllers/';
+	var controllersDirectory = path.join(__dirname, '/../controllers/');
 
   // Load All controllers
   app.controllers = {};

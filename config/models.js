@@ -1,8 +1,10 @@
 'use strict';
 var TAG = _TAG('config.models');
 
+var path = require('path');
+
 // Load instantly, so that files can access models directly on root scope
-var modelsDirectory = __dirname + '/..' + '/models/';
+var modelsDirectory = path.join(__dirname, '/../models';
 
 app.models = {};
 
