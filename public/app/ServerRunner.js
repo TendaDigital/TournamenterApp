@@ -184,6 +184,13 @@ angular.module('ServerRunner', [
     $scope.needsSave = false;
   }
 
+  // Opens a external browser window with the app
+  $scope.openApp = function save(){
+    var shell = require('electron').shell
+    var url = 'http://localhost:' + $scope.configs.env.PORT
+    shell.openExternal(url);
+  }
+
   // Removes this server
   $scope.deleteServer = function deleteServer(confirm) {
     if(confirm)

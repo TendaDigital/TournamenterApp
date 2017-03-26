@@ -13,6 +13,11 @@
     </md-switch>
     <div flex></div>
 
+    <md-button class="md-secondary" ng-click="openApp()" ng-disabled="!serverUp">
+      Open App
+      <md-icon md-font-icon="mdi mdi-web"></md-icon>
+    </md-button>
+
     <md-button class="md-primary" ng-click="save()" ng-disabled="!needsSave">
       Save
     </md-button>
