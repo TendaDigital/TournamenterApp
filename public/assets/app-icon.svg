@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!-- Generator: Adobe Illustrator 19.2.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 790 790" style="enable-background:new 0 0 790 790;" xml:space="preserve">
 <style type="text/css">
 	.st0{fill:#FFFFFF;stroke:#3BB5F2;stroke-width:24;stroke-miterlimit:10;}
 	.st1{fill:#3BB5F2;}
-	.st2{fill:#FFFFFF;}
-	.st3{font-family:'Nougatine';}
-	.st4{font-size:415.9451px;}
+	.st2{enable-background:new    ;}
+	.st3{fill:#FFFFFF;}
 </style>
 <path id="XMLID_21_" class="st0" d="M76.9,509.1L316.6,94c34.9-60.4,122-60.4,156.9,0l239.7,415.1C748,569.5,704.4,645,634.7,645
 	H155.3C85.6,645,42,569.5,76.9,509.1z"/>
@@ -15,5 +14,8 @@
 	c59.3-23.4,121.8,26.2,112.4,89.3l-64.5,433.8C568.8,710.2,494.6,739.5,444.7,699.8z"/>
 <path id="XMLID_5_" class="st1" d="M220.5,260.4L117,439.5l242.2,192.3c10.7,8.5,23.9,13.1,37.5,13.1h181.8l40.6-272.5
 	c2-13.5-0.6-27.2-7.4-39L498.1,136.7l-247.6,97.8C237.9,239.5,227.3,248.6,220.5,260.4z"/>
-<text id="XMLID_2_" transform="matrix(1 0 0 1 348.0458 546.7648)" class="st2 st3 st4">t</text>
+<g class="st2">
+	<path class="st3" d="M378.1,516.3c-20-20-30.1-44.5-30.1-73.5v-156h52v52h52v52h-52v52c0,14.4,5,26.7,15,37c10.3,10,22.6,15,37,15
+		v52C423.1,546.8,398.4,536.6,378.1,516.3z"/>
+</g>
 </svg>
