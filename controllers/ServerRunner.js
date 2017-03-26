@@ -49,8 +49,6 @@ exports.init = function (){
 
       // Defalts on process options
       data = _.defaults(data, {
-        minUptime: 2000,
-        spinSleepTime: 2000,
         extensions: {},
       })
 
@@ -107,16 +105,16 @@ exports.start = function (serverId, cb) {
 
   // Prepare instance options
   let opts = {
-    max: 0,
-    uid: serverId,
+    max: 5,
+    uid: `Tournamenter ${serverId}`,
     silent: true,
     killTree: true,
     // command: 'node',
     // fork: true,
     // cwd: path.join(__dirname, '../'),
 
-    minUptime: optsDb.minUptime || 2000,
-    spinSleepTime: optsDb.spinSleepTime || 2000,
+    minUptime: 5000,
+    spinSleepTime: 2000,
 
     env: _.defaults(optsDb.env, {
       APP_NAME: 'Tournamenter',
@@ -153,6 +151,8 @@ exports.stop = function (serverId) {
     // Emit a debug log
     exports.emitLog(serverId, 'server', `Killing server: ${serverId}`);
 
+    // Flag indicating stop will occur
+    exports._instances[serverId].willStop = true;
     exports._instances[serverId].kill(true);
   }
 }
@@ -198,15 +198,34 @@ exports._bindEvents = function (serverId, child) {
   child.on('restart', () => {
     // child.STATE = 'START';
     exports.emitUpdate(serverId);
+
+    // Notify application
+    if (!child.willStop) {
+      eApp.dock && eApp.dock.bounce()
+
+      app.controllers.MainWindow.notify(
+        'Server Crashed',
+        `WARNING: Server '${serverId}' crashed for the ${child.times} time. Re-spawning...`,
+        'OK');
+    }
   })
 
-  child.on('exit', () => {
+  child.on('exit', (code) => {
     // child.STATE = null;
     // Destroy instance
     delete exports._instances[serverId];
 
     // Emits the destroyed instance
     exports.emitUpdate(serverId);
+
+    // If it did crash, notify application
+    if (!child.willStop) {
+      eApp.dock && eApp.dock.bounce('critical')
+      app.controllers.MainWindow.notify(
+        'Server Crashed',
+        `WARNING: Server '${serverId}' crashed. Open the server logs for more info.`,
+        'OK');
+    }
   })
 
   // Logs handling
