@@ -20,6 +20,17 @@ var path = require('path');
 var Settings = require('./Settings');
 var dirName = app.config.fileModelsDir;
 
+/*
+ * Stores collection types in a mapped object.
+ * Each key represents an type of object that can be stored, and it's 
+ * content is an object with possible methods:
+ *  {
+ *    // If set, will set defaults to the object always before being saved
+ *    beforeSave: [Function(id, data)],
+ *  }
+ */
+exports.types = {};
+
 exports.init = function (){
   var fileModels = path.join(electron.app.getPath('userData'), dirName)
   var ipc = electron.ipcMain
@@ -28,9 +39,6 @@ exports.init = function (){
   try {
     fs.mkdirSync(fileModels)
   }catch (e){}
-
-  // Initialize collections
-  exports.createCollection('servers');
 
   // Pipe Settings to IPC
   ipc.on('GenericFileModel:list', function (event, type) {
@@ -61,9 +69,12 @@ exports.emit = function (type, id){
   _window && _window.webContents.send('GenericFileModel:update:'+type, id);
 }
 
-// Creates a new collection (creates the collection folder)
-exports.createCollection = function (type) {
+// Creates a new collection (creates the collection folder, and register in `types`)
+exports.createCollection = function (type, configs) {
   var modelsFolder = path.join(electron.app.getPath('userData'), dirName, type)
+
+  // Save configs
+  exports.types[type] = configs || {};
 
   try {
     fs.mkdirSync(modelsFolder);
@@ -73,17 +84,18 @@ exports.createCollection = function (type) {
 
 // List file names (id's)
 exports.list = function (type){
-  console.log(TAG, chalk.cyan('list'), chalk.red(type));
 
   var dir = path.join(electron.app.getPath('userData'), dirName, type)
 
   var ids = [];
   fs.readdirSync(dir).forEach( (file) => {
-		if (file.indexOf('.json') < 0)
-			return;
+    if (file.indexOf('.json') < 0)
+      return;
 
-		ids.push(path.basename(file, '.json'));
-	});
+    ids.push(path.basename(file, '.json'));
+  });
+
+  console.log(TAG, chalk.cyan('list'), chalk.red(type), chalk.dim(ids.length));
 
   return ids;
 }
@@ -112,7 +124,7 @@ exports.get = function (type, id) {
     console.error(TAG, 'Invalid file', err);
   }
 
-  return null;
+  return {};
 }
 
 // Get the object by id
@@ -137,16 +149,24 @@ exports.getPath = function (type, id) {
 exports.save = function (type, id, json) {
   console.log(TAG, chalk.cyan('save'), chalk.red(type), chalk.red(id))
 
-  var dir = path.join(electron.app.getPath('userData'), dirName, type)
+  var dir = path.join(eApp.getPath('userData'), dirName, type)
   var file = path.join(dir, id + '.json')
+  
+  // Execute `beforeSave` hook
+  var typeConfigs = exports.types[type]
+  if (typeConfigs.beforeSave) {
+    json = typeConfigs.beforeSave(id, json)
+  }
 
-  var data = JSON.stringify(json || {})
+  // Ensure it's an object
+  json = json || {}
 
   // Save File
-  fs.writeFileSync(file, data);
+  fs.writeFileSync(file, JSON.stringify(json));
 
   // Notify ipc
   exports.emit(type, id);
+
   return json;
 }
 
