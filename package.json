@@ -13,7 +13,7 @@
   "version": "1.4.0",
   "README": "none",
   "engines": {
-    "node": "6.10.1"
+    "node": "6.9.1"
   },
   "main": "index.js",
   "scripts": {
