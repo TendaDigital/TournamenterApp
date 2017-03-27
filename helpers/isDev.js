@@ -1,3 +1,3 @@
 module.exports = function isDev() {
-  return eApp.getPath("exe").includes("/node_modules/electron-prebuilt/");
+  return process.defaultApp || /[\\/]electron-prebuilt[\\/]/.test(process.execPath) || /[\\/]electron[\\/]/.test(process.execPath);
 }

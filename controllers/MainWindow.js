@@ -46,3 +46,11 @@ exports.notify = function notify(title, message, stick) {
 
   mainWindow.webContents.send('notify', title, message, stick);
 }
+
+exports.send = function send() {
+  if (!mainWindow) {
+    return;
+  }
+
+  mainWindow.webContents.send.apply(mainWindow.webContents, arguments);
+}

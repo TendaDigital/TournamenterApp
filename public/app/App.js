@@ -1,3 +1,6 @@
+// Get IPC in electron
+var ipc = require('electron').ipcRenderer;
+
 angular.module('App', [
   'ServerRunner',
   'ExtensionManager',
@@ -58,35 +61,31 @@ angular.module('App', [
 // Safelly provides binding/unbinding to ipcRenderer of Electron
 .service('ipcRenderer', function (){
   var service = this;
-  var ipcRenderer = require('electron').ipcRenderer;
 
   // Override 'on' method to listen to $scope and stop listening on destroy
   service.on = function ($scope, channel, callback) {
-    ipcRenderer.on(channel, callback)
+    ipc.on(channel, callback)
 
     // Set destroy handler only if scope is defined
     $scope && $scope.$on('$destroy', handler);
 
     // Remove listener
     function handler(){
-      ipcRenderer.removeListener(channel, callback)
+      ipc.removeListener(channel, callback)
     }
 
     return handler;
   }
 
   // Expose the same methods for sending
-  service.send = ipcRenderer.send.bind(ipcRenderer)
-  service.sendSync = ipcRenderer.sendSync.bind(ipcRenderer)
+  service.send = ipc.send.bind(ipc)
+  service.sendSync = ipc.sendSync.bind(ipc)
 })
 
 // Keep Settings in sync with main process
 .service('Settings', function (ipcRenderer){
   var service = this;
   console.log('Settings started');
-
-  // Get IPC in electron
-  var ipc = require('electron').ipcRenderer;
 
   // Load Settings
   service.settings = ipc.sendSync('Settings:get', null);
@@ -116,15 +115,32 @@ angular.module('App', [
 
 .controller('AppCtrl', function ($timeout, $scope) {
   $scope._loaded = false;
-
   $scope.version = require('electron').remote.app.getVersion();
+  $scope.newUpdate = require('electron').remote.require('./helpers/CheckUpdate.js').newUpdate;
 
   $scope.openExternal = function openExternal(link){
     const {shell} = require('electron');
     shell.openExternal(link);
   }
 
+  $scope.showUpdateInfo = function showUpdateInfo(){
+    require('electron').remote.dialog.showMessageBox({
+      type: 'info',
+      title: $scope.newUpdate.name,
+      message: $scope.newUpdate.notes,
+    })
+  }
+
   $timeout(function (){
     $scope._loaded = true;
   }, 1000);
+
+  // Update newUpdate once fetch is done
+  ipc.on('newUpdate', function (update) {
+    $scope.newUpdate = update
+
+    // Apply changes to scope if not in digest phase
+    if(!$scope.$$phase)
+      $scope.$apply();
+  })
 })
