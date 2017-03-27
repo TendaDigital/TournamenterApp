@@ -10,7 +10,7 @@
   "homepage": "https://github.com/ivanseidel/TournamenterApp",
   "repository": "https://github.com/ivanseidel/TournamenterApp",
   "license": "MIT",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "README": "none",
   "engines": {
     "node": "6.9.1"
@@ -31,7 +31,8 @@
     "mac": {
       "title": "Tournamenter Manager",
       "target": [
-        "dmg"
+        "dmg",
+        "zip"
       ],
       "icon-size": 120,
       "icon": "build/icon.icns"
@@ -62,6 +63,9 @@
     },
     "linux": {
       "description": "Tournamenter Manager App"
+    },
+    "nsis": {
+      "perMachine": true
     }
   },
   "dependencies": {
@@ -71,6 +75,7 @@
     "kerberos": "0.0.21",
     "lodash": "^4.13.1",
     "npm": "^3.10.5",
+    "request": "^2.81.0",
     "tournamenter": "git+https://github.com/ivanseidel/Tournamenter.git"
   },
   "devDependencies": {
