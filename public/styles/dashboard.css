@@ -117,6 +117,20 @@
 
 
 /*
+  Update bar
+*/
+.update-bar {
+  background-color: rgb(120, 27, 243);
+  /*border-top: solid 1px #D0D0D0;*/
+
+  color: #FFF;
+  line-height: 24px;
+  font-size: 16px;
+  padding: 8px 16px;
+}
+
+
+/*
   Extension panel
 */
 .installing > .extensions-panel{
