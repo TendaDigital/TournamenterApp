@@ -69,6 +69,11 @@ exports.manualCheckUpdate = function () {
       return
     }
 
+    if (!update) {
+      app.controllers.MainWindow.notify('Updater', 'Tournamenter is up to date! Swweeeeeeet');
+      return
+    }
+
     // Update is available. Notify window
     app.controllers.MainWindow.notify(
       'Updater Available',
