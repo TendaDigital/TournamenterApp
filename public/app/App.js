@@ -56,6 +56,19 @@ angular.module('App', [
   $rootScope.$on('App:reload', function (){
     location.reload();
   })
+
+  // Open AppData folder
+  $rootScope.$on('App:openAppData', function () {
+    var AppData = require('electron').remote.app.getPath('userData')
+    require('electron').shell.showItemInFolder(AppData)
+  })
+
+  // Open Extensions folder
+  $rootScope.$on('App:openExtensions', function () {
+    var AppData = require('electron').remote.app.getPath('userData')
+    var Extensions = require('path').join(AppData, '/extensions/node_modules')
+    require('electron').shell.showItemInFolder(Extensions)
+  })
 })
 
 // Safelly provides binding/unbinding to ipcRenderer of Electron
@@ -116,6 +129,7 @@ angular.module('App', [
 .controller('AppCtrl', function ($timeout, $scope) {
   $scope._loaded = false;
   $scope.version = require('electron').remote.app.getVersion();
+  $scope.versionTournamenter = require('tournamenter/package.json').version;
   $scope.newUpdate = require('electron').remote.require('./helpers/CheckUpdate.js').newUpdate;
 
   $scope.openExternal = function openExternal(link){

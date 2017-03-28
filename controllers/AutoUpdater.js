@@ -14,7 +14,6 @@ exports.init = function init(window) {
 
   if(app.helpers.isDev()) {
     console.log(TAG, chalk.dim('Dev Mode. Skip autoDownload'));
-    console.log(TAG, chalk.white(feedURL));
     return;
   }
 
