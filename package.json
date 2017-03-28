@@ -62,7 +62,11 @@
       "msi": false
     },
     "linux": {
-      "description": "Tournamenter Manager App"
+      "description": "Tournamenter Manager App",
+      "target": [
+        "AppImage",
+        "deb"
+      ]
     },
     "nsis": {
       "perMachine": true
