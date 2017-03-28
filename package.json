@@ -10,7 +10,7 @@
   "homepage": "https://github.com/ivanseidel/TournamenterApp",
   "repository": "https://github.com/ivanseidel/TournamenterApp",
   "license": "MIT",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "README": "none",
   "engines": {
     "node": "6.9.1"
@@ -62,7 +62,11 @@
       "msi": false
     },
     "linux": {
-      "description": "Tournamenter Manager App"
+      "description": "Tournamenter Manager App",
+      "target": [
+        "AppImage",
+        "deb"
+      ]
     },
     "nsis": {
       "perMachine": true

@@ -32,7 +32,7 @@ before_install:
 
 install:
   - nvm install 6.2
-  - npm install electron-builder@5.12.1
+  - npm install electron-builder@8.7.0
   - npm install
   - npm install tournamenter
   - npm prune
