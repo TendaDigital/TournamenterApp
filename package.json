@@ -80,7 +80,7 @@
     "lodash": "^4.13.1",
     "npm": "^3.10.5",
     "request": "^2.81.0",
-    "tournamenter": "git+https://github.com/ivanseidel/Tournamenter.git"
+    "tournamenter": "^2.2.7"
   },
   "devDependencies": {
     "bower": "latest",
