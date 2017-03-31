@@ -65,7 +65,7 @@
       "description": "Tournamenter Manager App",
       "target": [
         "AppImage",
-        "deb:x64"
+        "deb:x64",
         "deb:armv7l"
       ]
     },
