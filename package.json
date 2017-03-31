@@ -10,7 +10,7 @@
   "homepage": "https://github.com/ivanseidel/TournamenterApp",
   "repository": "https://github.com/ivanseidel/TournamenterApp",
   "license": "MIT",
-  "version": "1.4.8",
+  "version": "1.5.0",
   "README": "none",
   "engines": {
     "node": "6.9.1"
@@ -65,7 +65,8 @@
       "description": "Tournamenter Manager App",
       "target": [
         "AppImage",
-        "deb"
+        "deb:x64"
+        "deb:armv7l"
       ]
     },
     "nsis": {
@@ -75,6 +76,7 @@
   "dependencies": {
     "async": "1.2.1",
     "chalk": "^1.1.3",
+    "electron-builder": "^8.7.0",
     "forever-monitor": "^1.7.0",
     "kerberos": "0.0.21",
     "lodash": "^4.13.1",
