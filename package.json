@@ -27,18 +27,17 @@
   "build": {
     "appId": "com.tournamenter",
     "asar": true,
-    "category": "public.app-category.productivity",
     "mac": {
-      "title": "Tournamenter Manager",
+      "category": "public.app-category.productivity",
       "target": [
         "dmg",
         "zip"
       ],
-      "icon-size": 120,
       "icon": "build/icon.icns"
     },
     "dmg": {
       "background": "build/background.png",
+      "iconSize": 120,
       "contents": [
         {
           "x": 610,
@@ -57,9 +56,7 @@
       "target": [
         "squirrel"
       ],
-      "iconUrl": "https://raw.githubusercontent.com/ivanseidel/TournamenterApp/master/build/icon.ico",
-      "icon": "build/icon.ico",
-      "msi": false
+      "icon": "build/icon.ico"
     },
     "linux": {
       "description": "Tournamenter Manager App",
@@ -69,8 +66,9 @@
         "deb:armv7l"
       ]
     },
-    "nsis": {
-      "perMachine": true
+    "squirrelWindows": {
+      "iconUrl": "https://raw.githubusercontent.com/ivanseidel/TournamenterApp/master/build/icon.ico",
+      "msi": false
     }
   },
   "dependencies": {
@@ -88,6 +86,7 @@
     "bower-installer": "latest",
     "electron": "^1.6.2",
     "electron-builder": "^16.6.0",
+    "electron-builder-squirrel-windows": "^16.6.0",
     "electron-prebuilt": "^1.2.6",
     "rimraf": "^2.5.3"
   }
