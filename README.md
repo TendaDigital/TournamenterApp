@@ -9,7 +9,7 @@
 [tournamenter-version-image]: https://img.shields.io/npm/v/tournamenter.svg?style=flat&label=Tournamenter
 [tournamenter-version-link]: https://www.npmjs.com/package/tournamenter
 [release-version-image]: https://img.shields.io/github/release/ivanseidel/TournamenterApp.svg
-[release-version-link]: https://www.npmjs.com/package/tournamenter
+[release-version-link]: https://tournamenter.herokuapp.com
 
 This project is an wrapper for the [Tournamenter](https://github.com/ivanseidel/tournamenter)
 app. It is a service manager that can launch and manage Tournamenter servers locally.
