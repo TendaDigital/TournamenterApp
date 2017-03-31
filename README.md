@@ -14,6 +14,8 @@
 This project is an wrapper for the [Tournamenter](https://github.com/ivanseidel/tournamenter)
 app. It is a service manager that can launch and manage Tournamenter servers locally.
 
+![TournamenterApp](midia/screenshot.png)
+
 ## Tournamenter is
 A system that allows you to manage your tournament or event, built with
 [Node.JS](https://nodejs.org) and [Electron](https://electron.atom.io).
