@@ -95,6 +95,27 @@ angular.module('App', [
   service.sendSync = ipc.sendSync.bind(ipc)
 })
 
+// Safelly provides binding/unbinding to ipcRenderer of Electron
+.service('NetworkInterfaces', function (){
+  var service = this;
+  const ip = require('ip')
+
+  service.list = function () {
+    let ips = []
+
+    // Add internal IP
+    ips.push({ip: 'localhost', type: 'private'})
+
+    // Get public IP
+    let public = ip.address('public')
+    if (public) {
+      ips.push({ip: public, type: 'public'})
+    }
+
+    return ips
+  }
+})
+
 // Keep Settings in sync with main process
 .service('Settings', function (ipcRenderer){
   var service = this;

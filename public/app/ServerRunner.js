@@ -17,7 +17,7 @@ angular.module('ServerRunner', [
 
   // Listens to create action
   $rootScope.$on('Servers:create', function (event, id) {
-    Dialogs.prompt('Defina um identificador para o servidor', 'ID', '', (name) => {
+    Dialogs.prompt('Create the server identifier: (ex: myserver)', 'ID', '', (name) => {
       if(!name)
         return;
 
@@ -136,7 +136,8 @@ angular.module('ServerRunner', [
 // Configures a server and enables to start/stop
 //
 .controller('ServerWindowCtrl', function ($scope, GenericFileModel,
-  ServerService, Dialogs, WindowService, ExtensionManagerService) {
+  ServerService, Dialogs, WindowService, ExtensionManagerService,
+  NetworkInterfaces, $timeout) {
   const MAX_LOG_COUNT = 2000;
 
   var win = null;
@@ -149,6 +150,7 @@ angular.module('ServerRunner', [
 
   $scope.configs = {};
   $scope.serverId = null;
+  $scope.networkInterfaces = []
 
   $scope.needsSave = false;
 
@@ -185,10 +187,16 @@ angular.module('ServerRunner', [
   }
 
   // Opens a external browser window with the app
-  $scope.openApp = function save(){
-    var shell = require('electron').shell
-    var url = 'http://localhost:' + $scope.configs.env.PORT
-    shell.openExternal(url);
+  $scope.openApp = function openApp(ip) {
+    let url = `http://${ip || 'localhost'}:${$scope.configs.env.PORT}`
+    require('electron').shell.openExternal(url);
+  }
+
+  $scope.openAppMenu = function openAppMenu($mdMenu) {
+    $timeout(() => {
+      $mdMenu.open()
+    }, 100)
+    $scope.networkInterfaces = NetworkInterfaces.list()
   }
 
   // Removes this server
