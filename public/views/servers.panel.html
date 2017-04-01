@@ -3,8 +3,13 @@
     ng-repeat="server in servers"
     ng-click="openServerWindow(server)">
 
-    <small flex><strong>{{server}}</strong> [{{serversPorts[server]}}]</small>
+    <small flex><strong>{{server}}</strong></small>
     <flex></flex>
+    <div>
+      <small class="label" style="font-size: 10px; margin-right: 8px;">
+        Port {{serversPorts[server]}}
+      </small>
+    </div>
 
     <div style="font-size: 28px;">
       <md-icon
