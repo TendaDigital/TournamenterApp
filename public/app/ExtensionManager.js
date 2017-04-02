@@ -10,7 +10,7 @@ angular.module('ExtensionManager', [
     name: 'Extensions',
     icon: 'mdi-puzzle',
     template: 'views/extensions.panel.html',
-    open: false,
+    open: true,
   })
 })
 

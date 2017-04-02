@@ -13,10 +13,32 @@
     </md-switch>
     <div flex></div>
 
-    <md-button class="md-secondary" ng-click="openApp()" ng-disabled="!serverUp">
-      Open App
-      <md-icon md-font-icon="mdi mdi-web"></md-icon>
-    </md-button>
+    <md-menu md-position-mode="target-right target" style="margin-top: 6px;">
+      <md-button class="md-secondary" ng-click="openAppMenu($mdMenu)" ng-disabled="!serverUp">
+        Open App
+        <md-icon md-menu-origin md-font-icon="mdi mdi-web"></md-icon>
+      </md-button>
+      <md-menu-content width="6">
+        <md-menu-item ng-if="!networkInterfaces">
+          <md-button disabled>
+            Loading Interfaces...
+          </md-button>
+        </md-menu-item>
+
+        <md-menu-item ng-repeat="interface in networkInterfaces track by interface.ip">
+          <md-button ng-click="openApp(interface.ip)">
+            <div layout="row" flex>
+              <p flex>{{interface.ip}}:{{configs.env.PORT}}</p>
+              <md-icon
+                md-font-icon="mdi"
+                ng-class="interface.type == 'public' ? 'mdi-wifi' : 'mdi-loop'"
+                md-menu-align-target
+                style="margin: auto 0px auto 0; font-size: 18px;"></md-icon>
+            </div>
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
 
     <md-button class="md-primary" ng-click="save()" ng-disabled="!needsSave">
       Save
