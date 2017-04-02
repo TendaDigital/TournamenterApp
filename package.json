@@ -80,7 +80,7 @@
     "lodash": "^4.13.1",
     "npm": "^3.10.5",
     "request": "^2.81.0",
-    "tournamenter": "2.2.8"
+    "tournamenter": "2.3.0"
   },
   "devDependencies": {
     "bower": "latest",
