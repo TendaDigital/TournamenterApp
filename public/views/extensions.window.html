@@ -88,10 +88,12 @@
     </div>
 
 
-    <div layout="column">
+    <div layout="column" layout-align="start end">
       <div class="version">
+        <span ng-if="extension.update">New Update: </span>
         <md-icon md-font-icon="mdi mdi-layers"></md-icon>
         <span>v{{ extension.version }}</span>
+        <span ng-if="extension.update"> -> v{{ extension.update }}</span>
       </div>
       <div flex></div>
       <div layout="row">

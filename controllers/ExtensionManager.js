@@ -1,5 +1,5 @@
 'use strict';
-var TAG = _TAG('TournamenterModules');
+var TAG = _TAG('ExtensionManager');
 //
 // Manages (extra) extensions for Tournamenter
 //
@@ -12,10 +12,17 @@ var TAG = _TAG('TournamenterModules');
 //
 const fs = require('fs');
 const path = require('path');
+const async = require('async');
 const fork = require('child_process').fork;
 const readline = require('readline');
 
 const emit = app.helpers.emit;
+
+//
+// Cache variables
+// 
+exports._cachedUpdates = null
+exports._cachedExtensions = null
 
 //
 // Initialize module
@@ -54,6 +61,9 @@ exports.init = function () {
   ipc.on('ExtensionManager:executing', function (event, id) {
     event.returnValue = exports.isExecuting();
   })
+
+  // Delay check for updates a bit
+  setTimeout(exports.checkUpdates, 4000);
 }
 
 
@@ -89,7 +99,6 @@ exports.getExtensionsPaths = function (extensions) {
 //
 // List packages with it's `package.js` information
 //
-exports._cachedExtensions = null
 exports.list = function () {
   const installPath = path.join(exports.getInstallPath(), 'node_modules');
 
@@ -142,7 +151,7 @@ exports.list = function () {
     if(!('_requiredBy' in extension))
       return true;
 
-      // It's a root dependency (installed by `npm install <dep>`)
+    // It's a root dependency (installed by `npm install <dep>`)
     if(extension._requiredBy.indexOf('#USER') >= 0)
       return true;
 
@@ -163,6 +172,12 @@ exports.list = function () {
 
       '_resolved',
     ])
+  })
+
+  // Set updates into objects
+  extensions = extensions.map((extension) => {
+    extension.update = exports.getUpdate(extension.name)
+    return extension
   })
 
   // Save cache
@@ -217,7 +232,8 @@ exports.install = function (extension, cb) {
 
   // Bind stdout and stderr read events and pipes to ipc
   app.helpers.bindProcessLogsToIPC(proc, 'ExtensionManager', {
-    error: /ERR!/g,
+    error: /ERR!/,
+    skip: /npm (verb|http|info)/
   });
 }
 
@@ -239,10 +255,35 @@ exports.remove = function (extension, cb){
 
   // Bind stdout and stderr read events and pipes to ipc
   app.helpers.bindProcessLogsToIPC(proc, 'ExtensionManager', {
-    error: /ERR!/g,
+    error: /ERR!/,
+    skip: /npm (verb|http|info)/
   });
 }
 
+//
+// Check for updates on all dependencies
+//
+exports.checkUpdates = function (next) {
+  let packages = exports.list()
+  async.mapLimit(packages, 2, app.helpers.CheckPackageUpdate, (err, updates) => {
+    // Join the 'names' with the versions, to create a map table from module name to version
+    let versions = _.zipObject(_.map(packages, 'name'), updates)
+    exports._cachedUpdates = versions
+
+    // Clear Extensions cache
+    exports._cachedExtensions = null
+
+    // Notify update
+    emit('ExtensionManager:update', true)
+  })
+}
+
+// 
+// Get an update for a given module name string. Returns null if up to date
+// 
+exports.getUpdate = function (name) {
+  return exports._cachedUpdates && exports._cachedUpdates[name] || null
+}
 
 //
 // Low level call for NPM
@@ -294,6 +335,12 @@ exports.runNpm = function (params, cb){
     exports.setExecuting(false);
     console.log(TAG, chalk.green(`npm run ${params[0]} ${params[1]}... finish: ${code}`));
     emit('ExtensionManager:log', 'server', `Install finished. Code ${code}`);
+
+    // Clear extension update cache
+    exports._cachedUpdates = null
+
+    // Check for updates
+    exports.checkUpdates()
 
     // Callback with error
     cb && cb(failed ? errors && errors.join('\r\n') : null);

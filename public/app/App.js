@@ -151,7 +151,7 @@ angular.module('App', [
   $scope._loaded = false;
   $scope.version = require('electron').remote.app.getVersion();
   $scope.versionTournamenter = require('tournamenter/package.json').version;
-  $scope.newUpdate = require('electron').remote.require('./helpers/CheckUpdate.js').newUpdate;
+  $scope.newUpdate = require('electron').remote.require('./helpers/CheckAppUpdate.js').newUpdate;
 
   $scope.openExternal = function openExternal(link){
     const {shell} = require('electron');

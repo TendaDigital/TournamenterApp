@@ -62,7 +62,7 @@ exports.init = function init(window) {
 }
 
 exports.manualCheckUpdate = function () {
-  app.helpers.CheckUpdate(FEED_URL, function (err, update) {
+  app.helpers.CheckAppUpdate(FEED_URL, function (err, update) {
     if (err) {
       console.error(TAG, err)
       app.controllers.MainWindow.notify('Update Error', 'Failed to check for updates');
