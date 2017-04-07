@@ -17,9 +17,12 @@ module.exports = function bindProcessLogsToIPC(proc, namespace, regexs = {}){
     if(!regexs.error || (regexs.error && regexs.error.test(line)))
       return emit(`${namespace}:log`, 'error', line);
 
+    // Skip lines
+    if(regexs.skip && regexs.skip.test(line))
+      return;
+
     // Emits a warning
     emit(`${namespace}:log`, 'warn', line);
-
   });
 
 }

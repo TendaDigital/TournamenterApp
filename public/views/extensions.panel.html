@@ -4,7 +4,7 @@
   <md-list ng-cloak style="padding: 0;"
     ng-class="{installing: executing}">
 
-    <md-list-item class="secondary-button-padding">
+    <md-list-item class="secondary-button-padding" style="padding: 0;">
       <div flex style="line-height: 1.2; font-size: 14px; margin: 8px 16px;">
         Installed: <small class="label" style="background-color: #999;">
           {{ extensions.length }}
@@ -25,12 +25,12 @@
       ng-repeat="extension in extensions track by extension.name">
 
       <div flex style="line-height: 1.2; margin: 8px 8px 8px 0;">
-        <h5>{{ extension.name }}</h5>
+        <h5>{{ extension.name }} <small>{{ extension.update ? '(Update Available)' : ''}}</small></h5>
         <div class="description">{{ extension.description }}</div>
       </div>
       <!-- <flex></flex> -->
 
-      <div style="font-size: 14px;">
+      <div class="label" style="font-size: 10px;">
         v{{ extension.version }}
       </div>
 

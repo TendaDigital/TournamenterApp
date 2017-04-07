@@ -4,7 +4,7 @@ const request = require('request')
  * Checks for update given the url. 
  * Returns the Update object with ''
  */
-module.exports = function CheckUpdate(url, next) {
+module.exports = function CheckAppUpdate(url, next) {
   request({
     url: url,
     json: true,
