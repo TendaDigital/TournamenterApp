@@ -81,7 +81,7 @@
     "npm": "^3.10.5",
     "request": "^2.81.0",
     "semver": "^5.3.0",
-    "tournamenter": "2.3.0"
+    "tournamenter": "2.3.1"
   },
   "devDependencies": {
     "bower": "latest",
