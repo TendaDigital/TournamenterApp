@@ -10,7 +10,7 @@
   "homepage": "https://github.com/ivanseidel/TournamenterApp",
   "repository": "https://github.com/ivanseidel/TournamenterApp",
   "license": "MIT",
-  "version": "1.6.4",
+  "version": "1.6.5",
   "README": "none",
   "engines": {
     "node": "6.9.1"
@@ -81,7 +81,7 @@
     "npm": "^3.10.5",
     "request": "^2.81.0",
     "semver": "^5.3.0",
-    "tournamenter": "2.3.0"
+    "tournamenter": "2.3.1"
   },
   "devDependencies": {
     "bower": "latest",
