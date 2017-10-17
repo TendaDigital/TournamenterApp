@@ -3,15 +3,15 @@
 [![Build Status][travis-image]][travis-link] [![Build status][appveyor-image]][appveyor-link] [![Release][release-version-image]][release-version-link] [![Tournamenter Version][tournamenter-version-image]][tournamenter-version-link]
 
 [appveyor-image]: https://ci.appveyor.com/api/projects/status/kip5669pxyqr23jg/branch/deploy?svg=true
-[appveyor-link]: https://ci.appveyor.com/project/ivanseidel/tournamenterapp/branch/deploy
-[travis-image]: https://travis-ci.org/ivanseidel/TournamenterApp.svg?branch=deploy
-[travis-link]: https://travis-ci.org/ivanseidel/TournamenterApp
+[appveyor-link]: https://ci.appveyor.com/project/TendaDigital/tournamenterapp/branch/deploy
+[travis-image]: https://travis-ci.org/TendaDigital/TournamenterApp.svg?branch=deploy
+[travis-link]: https://travis-ci.org/TendaDigital/TournamenterApp
 [tournamenter-version-image]: https://img.shields.io/npm/v/tournamenter.svg?style=flat&label=Tournamenter
 [tournamenter-version-link]: https://www.npmjs.com/package/tournamenter
-[release-version-image]: https://img.shields.io/github/release/ivanseidel/TournamenterApp.svg
+[release-version-image]: https://img.shields.io/github/release/TendaDigital/TournamenterApp.svg
 [release-version-link]: https://tournamenter.herokuapp.com
 
-This project is an wrapper for the [Tournamenter](https://github.com/ivanseidel/tournamenter)
+This project is an wrapper for the [Tournamenter](https://github.com/TendaDigital/tournamenter)
 app. It is a service manager that can launch and manage Tournamenter servers locally.
 
 ![TournamenterApp](midia/screenshot.png)
