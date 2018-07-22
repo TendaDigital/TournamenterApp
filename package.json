@@ -22,7 +22,9 @@
     "postinstall": "bower install && bower-installer",
     "pack": "build --dir",
     "dist": "build",
-    "release": "build"
+    "release": "build",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "build": {
     "appId": "com.tournamenter",
@@ -78,10 +80,11 @@
     "ip": "^1.1.5",
     "kerberos": "0.0.21",
     "lodash": "^4.13.1",
-    "npm": "^3.10.5",
+    "npm": "^5.10.0",
     "request": "^2.81.0",
     "semver": "^5.3.0",
-    "tournamenter": "2.4.2"
+    "tournamenter": "2.4.2",
+    "snyk": "^1.89.0"
   },
   "devDependencies": {
     "bower": "latest",
@@ -91,5 +94,6 @@
     "electron-builder-squirrel-windows": "^16.6.0",
     "electron-prebuilt": "^1.2.6",
     "rimraf": "^2.5.3"
-  }
+  },
+  "snyk": true
 }
