@@ -1,5 +1,11 @@
 // Get IPC in electron
-var ipc = require('electron').ipcRenderer;
+var electron = require('electron');
+if (!electron.remote) {
+  try {
+    electron.remote = require('@electron/remote');
+  } catch (e) {}
+}
+var ipc = electron.ipcRenderer;
 
 angular.module('App', [
   'ServerRunner',

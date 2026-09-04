@@ -21,6 +21,11 @@ exports.launch = function (){
     width: 850,
     height: 600,
     icon: app.config.icon,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+      enableRemoteModule: true
+    }
   })
 
   // and load the index.html of the app.
@@ -29,6 +34,10 @@ exports.launch = function (){
   // Open the DevTools.
   if(app.helpers.isDev())
     mainWindow.webContents.openDevTools({detached: true})
+
+  try {
+    require('@electron/remote/main').enable(mainWindow.webContents);
+  } catch (e) {}
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {

@@ -2,7 +2,7 @@
   <md-menu-bar>
     <!-- Servers -->
     <md-menu>
-      <button ng-click="$mdOpenMenu()">
+      <button ng-click="$mdMenu.open($event)" aria-label="Servers menu">
         Servers
       </button>
 
@@ -30,7 +30,7 @@
 
     <!-- Developer -->
     <md-menu>
-      <button ng-click="$mdOpenMenu()">
+      <button ng-click="$mdMenu.open($event)" aria-label="Developer menu">
         Developer
       </button>
 
@@ -63,7 +63,5 @@
       </md-menu-content>
     </md-menu>
   </md-menu-bar>
-
-</md-menu-bar>
 
 </div>

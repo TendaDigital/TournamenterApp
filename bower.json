@@ -22,7 +22,7 @@
     "angular-aria": "^1.5.6",
     "angular-animate": "^1.5.6",
     "angular-ui-router": "^0.3.1",
-    "ngFx": "^1.1.0",
+    "ngFx": "https://github.com/PatrickJS/ng-Fx.git",
     "mdi": "^1.6.50",
     "angular-scroll-glue": "^2.0.7"
   },
@@ -36,6 +36,13 @@
           },
           {
             "public/.components/jquery/dist/jquery.min.map": "jquery.min.map"
+          }
+        ]
+      },
+      "underscore": {
+        "mapping": [
+          {
+            "public/.components/underscore/underscore-umd.js": "underscore.js"
           }
         ]
       },

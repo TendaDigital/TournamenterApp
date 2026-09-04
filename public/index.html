@@ -141,8 +141,9 @@
 
   <!-- Vendor -->
   <script type="text/javascript">
-    // jQuery Needs to be loaded like this in Electron to become global
+    // jQuery and Underscore need to be loaded in window scope for Electron
     window.$ = window.jQuery = require('./components/jquery/jquery.min.js');
+    window._ = require('lodash');
   </script>
   <script src="components/angular/angular.js"></script>
   <script src="components/gsap/TweenMax.js"></script>
