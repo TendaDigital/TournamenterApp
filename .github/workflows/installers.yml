@@ -1,0 +1,102 @@
+name: Native installers
+on:
+  push:
+    branches: [master, 'codex/**']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  installer:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-2025, macos-15, macos-15-intel]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 35
+    defaults:
+      run:
+        working-directory: desktop
+    env:
+      CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+      NEXT_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: desktop
+          persist-credentials: false
+      - name: Read companion revisions
+        id: sources
+        shell: bash
+        run: |
+          node -e "for (const [k,v] of Object.entries(require('./runtime-sources.json'))) console.log(k+'='+v)" >> "$GITHUB_OUTPUT"
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ steps.sources.outputs.coreRepository }}
+          ref: ${{ steps.sources.outputs.coreRevision }}
+          path: Tournamenter
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ steps.sources.outputs.obrRepository }}
+          ref: ${{ steps.sources.outputs.obrRevision }}
+          path: tournamenter-obr
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: |
+            desktop/package-lock.json
+            Tournamenter/package-lock.json
+            Tournamenter/client/package-lock.json
+            tournamenter-obr/package-lock.json
+      - name: Build Tournamenter and export its local client
+        working-directory: Tournamenter
+        run: |
+          npm ci
+          npm run build
+      - name: Build OBR scorer assets
+        working-directory: tournamenter-obr
+        run: |
+          npm ci
+          npm run build
+      - run: npm ci
+      - run: npm test
+      - run: npm run stage
+      - run: npm run dist
+      - name: Install and exercise the Windows setup
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $setup = (Get-ChildItem -Path dist -Filter '*.exe').FullName
+          $destination = Join-Path $env:RUNNER_TEMP 'TournamenterSmoke'
+          $process = Start-Process -FilePath $setup -ArgumentList @('/S', "/D=$destination") -Wait -PassThru
+          if ($process.ExitCode -ne 0) { throw "NSIS exited with $($process.ExitCode)" }
+          node scripts/smoke.mjs (Join-Path $destination 'Tournamenter.exe')
+          exit $LASTEXITCODE
+      - name: Install and exercise the macOS disk image
+        if: runner.os == 'macOS'
+        shell: bash
+        run: bash scripts/smoke-dmg.sh dist/*.dmg
+      - name: Install and exercise the Linux package and AppImage
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y xvfb ./dist/*.deb
+          xvfb-run -a node scripts/smoke.mjs /opt/Tournamenter/tournamenter-app
+          chmod +x dist/*.AppImage
+          (cd "$RUNNER_TEMP" && "$GITHUB_WORKSPACE"/desktop/dist/*.AppImage --appimage-extract >/dev/null)
+          xvfb-run -a node scripts/smoke.mjs "$RUNNER_TEMP/squashfs-root/tournamenter-app"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tournamenter-${{ matrix.os }}
+          if-no-files-found: error
+          path: |
+            desktop/dist/*.exe
+            desktop/dist/*.dmg
+            desktop/dist/*.deb
+            desktop/dist/*.AppImage

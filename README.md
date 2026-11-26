@@ -1,38 +1,35 @@
-![TournamenterApp](midia/Tournamenter.png)
+![Tournamenter](midia/Tournamenter.png)
 
-[![Build Status][travis-image]][travis-link] [![Build status][appveyor-image]][appveyor-link] [![Release][release-version-image]][release-version-link] [![Tournamenter Version][tournamenter-version-image]][tournamenter-version-link]
+Tournamenter Manager runs local Tournamenter servers on Windows, Linux and macOS. Each server can use its own name, port, database, password, logo and extensions. The installer includes Electron, the Tournamenter server, its exported web interface and the OBR scoring plugin. Running an event requires only the computer and its local network.
 
-[appveyor-image]: https://ci.appveyor.com/api/projects/status/kip5669pxyqr23jg/branch/deploy?svg=true
-[appveyor-link]: https://ci.appveyor.com/project/TendaDigital/tournamenterapp/branch/deploy
-[travis-image]: https://travis-ci.org/TendaDigital/TournamenterApp.svg?branch=deploy
-[travis-link]: https://travis-ci.org/TendaDigital/TournamenterApp
-[tournamenter-version-image]: https://img.shields.io/npm/v/tournamenter.svg?style=flat&label=Tournamenter
-[tournamenter-version-link]: https://www.npmjs.com/package/tournamenter
-[release-version-image]: https://img.shields.io/github/release/TendaDigital/TournamenterApp.svg
-[release-version-link]: https://tournamenter.herokuapp.com
+## Run an event
 
-This project is an wrapper for the [Tournamenter](https://github.com/TendaDigital/tournamenter)
-app. It is a service manager that can launch and manage Tournamenter servers locally.
+Install Tournamenter from the Windows setup, the macOS disk image or the Linux Debian package. Linux also has an AppImage. Open **Servers → New Server**, enter an identifier and configure the server. Choose **Save**, turn on **Start server**, then choose **Open App**. Other computers, projectors and scoring tablets on the same network can use the LAN address in that menu. The host computer must allow incoming connections on the configured port.
 
-![TournamenterApp](midia/screenshot.png)
+The manager reads existing server definitions from `FileModels/servers` in the Tournamenter application data directory. Their database locations, passwords and selected extensions carry over. New servers start with OBR enabled. Deleting a server definition leaves the tournament database on disk. **Developer → Open AppData Folder** opens the data directory.
 
-## Tournamenter is
-A system that allows you to manage your tournament or event, built with
-[Node.JS](https://nodejs.org) and [Electron](https://electron.atom.io).
+Use **Extension Manager** for additional trusted npm packages and GitHub repositories. Installation and updates of additional packages use the network. Their packages must include built runtime assets. The OBR plugin shipped in the installer is updated with the desktop application. The top-right menu opens the project releases page for application updates.
 
-It allows you to run events with a easy to use interface that let's you:
-* Manage Teams
-* Create Groups (Like Soccer Groups)
-* Create Tables (With custom ranking options and Columns)
-* Create `Views` that will be displayed in TV Screens and Projectors
-  (With custom `Pages` that can be customized)
+## Develop and package
 
-## Download and Install
-The App is in BETA, and should work fine on Mac and Windows. Download the latest version for your OS:
-* [Windows x64 (Latest)](http://tournamenter.herokuapp.com/download/windows)
-* [Mac OSX (Latest)](http://tournamenter.herokuapp.com/download/osx)
-* [Linux (Latest)](http://tournamenter.herokuapp.com/download/linux)
+Use Node.js 24 LTS or later and npm. Check out TournamenterApp, Tournamenter and tournamenter-obr as sibling directories. The companion repository names and tested commits are in [runtime-sources.json](runtime-sources.json). In each companion directory run the following commands.
 
-## What it does
-It allows you to create instances ("run servers") of Tournamenter without knowing
-a bit of `Terminal`. You can run multiple instances of Tournamenter simultaneously.
+```sh
+npm ci
+npm run build
+```
+
+From TournamenterApp run the following commands.
+
+```sh
+npm ci
+npm test
+npm run stage
+npm start
+```
+
+The staging step installs each companion's locked production dependency tree into an application resource directory and includes its built assets. Use `npm run stage -- /path/to/core /path/to/obr` for other checkout locations. Repeat staging after a server or plugin change.
+
+Run `npm run dist` on the target OS to create the native installer in `dist/`. The GitHub Actions workflow builds on Windows, Ubuntu, macOS Intel and macOS Apple Silicon. It installs or extracts each artifact, launches the resulting application with a temporary profile, starts a server with OBR, stores a team, reopens the manager and checks that the team persisted. The workflow attaches the installers to the successful run. The development builds have no verified publisher. Signed Windows distribution and notarized macOS distribution require the respective signing credentials.
+
+`npm run smoke` exercises a staged development checkout. `npm run smoke -- /path/to/installed/executable` exercises an installer output. Linux headless builds can run the command with `xvfb-run -a`.

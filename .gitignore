@@ -24,3 +24,7 @@ public/_components
 public/.components
 
 *.DS_Store
+
+runtime-local/
+.runtime-build-*/
+public/compiled/
