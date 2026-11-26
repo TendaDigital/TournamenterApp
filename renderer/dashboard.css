@@ -1,0 +1,85 @@
+* {box-sizing:border-box}
+body {margin:0;font:14px Roboto,Arial,sans-serif;color:#222;background:#fafafa}
+#root {height:100vh;display:flex;flex-direction:column}
+button,input,summary {font:inherit}
+button,summary {cursor:pointer}
+button {background:transparent;border:0;color:inherit;padding:8px 12px}
+button:hover:enabled,summary:hover {background-color:rgba(0,0,0,.06)}
+button:disabled,summary[aria-disabled=true] {opacity:.45;cursor:default}
+.icon {width:18px;height:18px;fill:currentColor;vertical-align:middle}
+header {height:40px;display:flex;align-items:center;background:white;box-shadow:0 1px 2px #0003;z-index:2}
+.spacer {flex:1}
+.brand {width:101px;background:#0875d0;align-self:stretch;display:flex;align-items:center;justify-content:center;gap:6px;font-size:10px;color:white;margin-right:16px}
+.brand img {width:18px;height:18px}
+.menu {position:relative}
+.menu summary {padding:10px 12px;list-style:none;white-space:nowrap}
+summary::-webkit-details-marker {display:none}
+.popup {position:absolute;top:100%;left:0;z-index:5;min-width:max-content;background:white;color:#222;box-shadow:0 3px 8px #0004;padding:8px 0}
+header>.menu:last-child .popup,.status .popup {left:auto;right:0}
+.popup button {display:block;width:100%;text-align:left;text-transform:none;font-weight:400}
+hr {border:0;border-top:1px solid #ddd}
+main {display:flex;flex:1;min-height:0}
+.workspace {display:flex;flex-direction:column;flex:1;min-width:0}
+nav {display:flex;min-height:48px;overflow-x:auto;background:#2c80d2;color:#eee}
+nav button {flex-shrink:0;white-space:nowrap;text-transform:uppercase;font-weight:500;border-bottom:2px solid transparent;padding:0 20px}
+nav .active {border-color:#ff5252;color:white}
+.page {overflow:auto;flex:1}
+aside {width:280px;overflow:auto;background:#f0f0f0;box-shadow:-1px 0 #0002}
+.panel {background:#eee;border-bottom:1px solid #ccc}
+.panel-heading,.server-link {width:100%;display:flex;text-align:left;align-items:center;gap:8px;min-height:32px}
+.panel-heading {padding:4px 8px}
+.panel-heading .icon {width:16px;color:#666}
+.side-row,.server-link {display:flex;align-items:center;gap:6px;border-top:1px solid #ddd;padding:6px 16px;min-height:48px}
+.server-link {font-size:13px}
+.side-row p,.extension p {font-size:12px;color:#707070}
+.side-row p {margin:6px 0}
+.side-row b {font-size:13px}
+.label {background:#555;color:white;border-radius:4px;padding:3px 6px;white-space:nowrap;font-size:10px}
+.indicator {color:#ff1744}
+.indicator.running {color:#00c853}
+.indicator .icon {width:22px;height:22px}
+.bar {display:flex;align-items:center;justify-content:space-between;min-height:78px;padding:8px 16px;color:white}
+.bar label,.toggle,.check {display:flex;align-items:center;gap:8px}
+.bar.status {font-size:16px}
+.bar.status button,.status summary,.settings button,.right button,.text-primary {text-transform:uppercase;font-size:14px;font-weight:500}
+.bar.stopped {background:#f44336}
+.bar.running {background:#4caf50}
+.bar.starting,.bar.stopping,.bar.dark {background:#424242}
+.logs {display:flex;flex-direction:column;background:#393939;color:#ddd}
+.logs summary {text-align:center;display:block;color:#bbb;padding:4px;font-size:10px}
+.logs .icon {width:14px;height:14px}
+.logs pre {overflow:auto;white-space:pre-wrap;margin:0;padding:12px;height:180px}
+.settings {padding:8px 16px 24px}
+.row {display:flex;align-items:flex-end;gap:8px;margin:18px 0 24px}
+.wide {width:70%}
+.field {display:flex;flex:1;flex-direction:column;color:#757575;font-size:12px}
+.field input {width:100%;margin-top:6px;font-size:16px;color:#333;background:transparent;padding:2px;border:0;border-bottom:1px solid #aaa}
+.field input:disabled {border-bottom-style:dotted;color:#999}
+.field input:focus {outline:0;border-color:#2c80d2}
+.check {padding:4px;font-size:13px}
+input[type=checkbox] {accent-color:#ff5722}
+input[role=switch] {appearance:none;position:relative;min-width:30px;width:30px;height:14px;border-radius:14px;background:#888;cursor:pointer;margin:4px 2px}
+input[role=switch]::after {position:absolute;content:"";width:20px;height:20px;top:-3px;left:-1px;background:#eee;border-radius:50%;box-shadow:0 1px 2px #0005}
+input[role=switch]:checked {background:#edac91}
+input[role=switch]:checked::after {left:12px;background:#ff5722}
+input[role=switch]:disabled {cursor:default;opacity:.65}
+.right,.install,.extension,.extension-actions,footer,.alert {display:flex;align-items:center}
+.right {justify-content:flex-end;margin-top:16px;gap:6px}
+.install {gap:14px;align-items:flex-end;margin:24px 16px}
+.raised {text-transform:uppercase;font-size:12px;font-weight:500;box-shadow:0 1px 3px #0004;border-radius:2px}
+.primary {background:#1976d2;color:white}
+.danger {background:#f44336;color:white}
+.raised.primary:hover:enabled {background:#1565c0}
+.raised.danger:hover:enabled {background:#d32f2f}
+.text-primary,.extension h3,.extension small {color:#2c80d2}
+.extension {justify-content:space-between;align-items:flex-start;gap:16px;background:#f0f0f0;border:1px solid #ccc;border-radius:4px;padding:16px;margin:16px}
+.extension h3 {margin:0}
+.extension-actions {flex-direction:column;align-items:flex-end;gap:8px;text-align:right;font-size:12px}
+.extension .version {color:#666}
+footer {min-height:24px;background:#e0e0e0;color:#777;padding:0 12px;font-size:12px;gap:3px}
+footer i {color:#e74c3c}
+footer button {padding:0;color:#457afb}
+footer .icon {width:14px;height:14px}
+.alert {justify-content:space-between;background:#ffebee;color:#9f1a1a;padding-left:16px}
+dialog {border:0;border-radius:3px;padding:24px;min-width:320px;box-shadow:0 6px 20px #0004}
+dialog::backdrop {background:#0006}
